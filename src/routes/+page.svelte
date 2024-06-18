@@ -1,16 +1,17 @@
 <script lang="ts">
-	import { CurrencyEur } from "phosphor-svelte";
-	import { conta } from "$lib/conta.svelte";
+	import Slide from "$lib/Slide.svelte";
+	import Step from "$lib/Step.svelte";
+	import { presentation } from "$lib/presentation.svelte";
+	import { fade } from "svelte/transition";
 </script>
 
-<div class="mx-auto flex h-screen w-[600px] flex-col p-8">
-	<h1 class="text-4xl font-bold">Olá Thomas!</h1>
-	<p class="mt-2 flex items-center">
-		O total de gastos atual é de
-		<span class="inline-flex items-center pl-1"
-			><CurrencyEur size={24} weight="bold" /> {conta.total.toFixed(2)}</span
-		>
-	</p>
+Total: {presentation.totalSlides}
+<br />
 
-	<a href="/conta" class="mt-4 flex gap-2 underline hover:opacity-50"> Gastos </a>
-</div>
+<Slide>
+	<h1 in:fade>Slide 1</h1>
+	<Step>Step 1</Step>
+	<Step>Step 2</Step>
+</Slide>
+
+<Slide>2</Slide>
