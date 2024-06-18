@@ -1,21 +1,28 @@
 import { useEventListener } from "runed";
 
 type ChangeSlide = (direction: "back" | "next") => void;
+type SlideArgs = {
+	isCurrent: () => boolean;
+	changeSlide: ChangeSlide;
+	totalSteps: number;
+};
 
 export class Slide {
-	#currentStep = $state(0);
+	#currentStep = $state(1);
 	#totalSteps = $state(0);
 
-	constructor(isActive: () => boolean, changeSlide: ChangeSlide) {
+	constructor({ isCurrent, changeSlide, totalSteps }: SlideArgs) {
+		this.#totalSteps = totalSteps;
+
 		$effect.root(() => {
 			useEventListener(
 				() => document,
 				"keydown",
 				(e) => {
-					if (!isActive()) return;
+					if (!isCurrent()) return;
 
 					if (e.key === "ArrowRight") {
-						if (this.#currentStep >= this.#totalSteps - 1) {
+						if (this.#currentStep >= this.#totalSteps) {
 							changeSlide("next");
 							this.#currentStep = 0;
 						} else {
@@ -38,23 +45,8 @@ export class Slide {
 		return this.#totalSteps;
 	}
 
-	registerStep() {
-		const currStep = $derived(this.#currentStep);
-		const step = this.totalSteps;
-		this.#totalSteps++;
-
-		$effect(() => {
-			return () => {
-				this.#totalSteps--;
-			};
-		});
-
-		return {
-			get isActive() {
-				return currStep === step;
-			},
-			step,
-		};
+	get currentStep() {
+		return this.#currentStep;
 	}
 }
 
@@ -72,9 +64,13 @@ class Presentation {
 		}
 	};
 
-	registerSlide() {
+	registerSlide(totalSteps: number) {
 		const idx = this.totalSlides;
-		const slide = new Slide(() => this.#slideIdx === idx, this.changeSlide);
+		const slide = new Slide({
+			isCurrent: () => this.#slideIdx === idx,
+			changeSlide: this.changeSlide,
+			totalSteps,
+		});
 		this.#slides.push(slide);
 
 		$effect(() => {
