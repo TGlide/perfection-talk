@@ -24,14 +24,15 @@ export class Slide {
 					if (e.key === "ArrowRight") {
 						if (this.#currentStep >= this.#totalSteps) {
 							changeSlide("next");
-							this.#currentStep = 0;
+							this.#currentStep = 1;
 						} else {
 							this.#currentStep++;
 						}
 					}
 					if (e.key === "ArrowLeft") {
-						if (this.#currentStep <= 0) {
+						if (this.#currentStep <= 1) {
 							changeSlide("back");
+							this.#currentStep = 1;
 						} else {
 							this.#currentStep--;
 						}
