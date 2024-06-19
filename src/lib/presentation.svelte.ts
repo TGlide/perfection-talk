@@ -1,79 +1,62 @@
 import { useEventListener } from "runed";
-
-type ChangeSlide = (direction: "back" | "next") => void;
-type SlideArgs = {
-	isCurrent: () => boolean;
-	changeSlide: ChangeSlide;
-	totalSteps: number;
-};
+import { clamp } from "./math";
 
 export class Slide {
-	#currentStep = $state(1);
-	#totalSteps = $state(0);
+	step = $state(1);
+	totalSteps = $state(0);
 
-	constructor({ isCurrent, changeSlide, totalSteps }: SlideArgs) {
-		this.#totalSteps = totalSteps;
-
-		useEventListener(
-			() => document,
-			"keydown",
-			(e) => {
-				if (!isCurrent()) return;
-
-				if (e.key === "ArrowRight") {
-					if (this.#currentStep >= this.#totalSteps) {
-						changeSlide("next");
-						this.#currentStep = 1;
-					} else {
-						this.#currentStep++;
-					}
-				}
-				if (e.key === "ArrowLeft") {
-					if (this.#currentStep <= 1) {
-						changeSlide("back");
-						this.#currentStep = 1;
-					} else {
-						this.#currentStep--;
-					}
-				}
-			},
-		);
-	}
-
-	get totalSteps() {
-		return this.#totalSteps;
-	}
-
-	get currentStep() {
-		return this.#currentStep;
+	constructor(totalSteps: number) {
+		this.totalSteps = totalSteps;
 	}
 }
 
 class Presentation {
-	slideIdx = $state(0);
+	#slideIdx = $state(0);
 	#slides: Slide[] = $state([]);
-	currentSlide = $derived(this.#slides[this.slideIdx]);
+	currSlide = $derived(this.#slides[this.slideIdx]);
 	totalSlides = $derived(this.#slides.length);
 
-	changeSlide: ChangeSlide = (direction) => {
-		if (direction === "next") {
-			this.slideIdx = Math.min(this.slideIdx + 1, this.totalSlides - 1);
-		} else {
-			this.slideIdx = Math.max(this.slideIdx - 1, 0);
-		}
-	};
+	constructor() {
+		$effect.root(() => {
+			useEventListener(
+				() => document,
+				"keydown",
+				(e) => {
+					if (!["ArrowRight", "ArrowLeft"].includes(e.key)) return;
+					e.stopPropagation();
+
+					const hasNextSlide = this.slideIdx < this.totalSlides - 1;
+					const hasNextStep = this.currSlide.step < this.currSlide.totalSteps;
+					const hasPrevSlide = this.slideIdx > 0;
+					const hasPrevStep = this.currSlide.step > 1;
+
+					if (e.key === "ArrowRight") {
+						if (hasNextStep) this.currSlide.step++;
+						else if (hasNextSlide) this.slideIdx++;
+					} else if (e.key === "ArrowLeft") {
+						if (hasPrevStep) this.currSlide.step--;
+						else if (hasPrevSlide) this.slideIdx--;
+					}
+				},
+			);
+		});
+	}
+
+	get slideIdx() {
+		return this.#slideIdx;
+	}
+
+	set slideIdx(idx: number) {
+		this.#slideIdx = clamp(0, idx, this.totalSlides - 1);
+	}
 
 	registerSlide(totalSteps: number) {
-		const idx = this.totalSlides;
-		const slide = new Slide({
-			isCurrent: () => this.slideIdx === idx,
-			changeSlide: this.changeSlide,
-			totalSteps,
-		});
+		const slide = new Slide(totalSteps);
 		this.#slides.push(slide);
 
 		$effect(() => {
 			return () => {
+				this.#slideIdx = clamp(0, this.#slideIdx, this.totalSlides - 1);
 				this.#slides.splice(this.slideIdx, 1);
 			};
 		});
@@ -82,7 +65,7 @@ class Presentation {
 	}
 
 	isCurrent(slide: Slide) {
-		return this.currentSlide === slide;
+		return this.currSlide === slide;
 	}
 }
 

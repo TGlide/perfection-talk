@@ -15,6 +15,7 @@
 	<title>Society PT</title>
 </svelte:head>
 
-<slot></slot>
+<div class="text-white h-screen w-screen overflow-hidden">
+	<slot></slot>
+</div>
 
-<style></style>
