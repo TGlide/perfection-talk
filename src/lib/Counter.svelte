@@ -20,18 +20,10 @@
 
 		return { update };
 	}
-
-	const blur = (_node: HTMLElement) => {
-		return {
-			delay: 150,
-			duration: 500,
-			css: (t: number, u: number) => `filter: blur(${u * 3}px); opacity: ${t * 1}`,
-		};
-	};
 </script>
 
 <div class={klass}>
-	<div class="wrapper" transition:blur>
+	<div class="wrapper">
 		{#each value?.toString() as char, index (index)}
 			{#if Number.isNaN(Number(char))}
 				<span>{char}</span>
