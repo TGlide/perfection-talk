@@ -8,6 +8,7 @@
 	import { expand, fix, mergeTransitions } from "$lib/transitions.svelte";
 	import { dev } from "$app/environment";
 	import FrameworkComparison from "./(slides)/framework-comparison.svelte";
+	import Experience from "./(slides)/experience.svelte";
 
 	$effect(() => {
 		// Always edit the last one, easier for creating stuff
@@ -105,6 +106,7 @@
 	</Slide>
 
 	<FrameworkComparison />
+	<Experience />
 </div>
 
 {#if dev}

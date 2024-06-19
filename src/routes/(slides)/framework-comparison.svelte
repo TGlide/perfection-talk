@@ -24,7 +24,7 @@
 				<img class="absolute left-[100px] top-[140px] size-[164px]" src="/react.svg" alt="react" />
 			</div>
 
-			<div class="flex gap-16 text-xl">
+			<div class="flex gap-16 text-xl font-bold">
 				<div class="flex flex-col items-center gap-4 text-center">
 					<div class="flex h-[600px] flex-col justify-end">
 						<div
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col items-center gap-16 transition" style:opacity={step >= 2 ? 1 : 0}>
+		<div class="flex flex-col items-center gap-16 font-bold transition" style:opacity={step >= 2 ? 1 : 0}>
 			<img src="/svelte.svg" alt="svelte" class="relative size-[300px]" />
 			<div class="flex items-end gap-8 text-xl">
 				<div class="flex flex-col items-center gap-4 text-center">

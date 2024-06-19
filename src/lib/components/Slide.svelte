@@ -1,15 +1,25 @@
 <script lang="ts">
 	import { type Snippet } from "svelte";
 	import { watch } from "runed";
-	import { presentation } from "$lib/presentation.svelte";
+	import { Slide, presentation } from "$lib/presentation.svelte";
 
-	const {
+	let {
 		children,
 		steps = 1,
 		class: klass,
-	}: { class?: string; children?: Snippet<[{ step: number }]>; steps?: number } = $props();
+		slide: slideProp = $bindable<Slide | null>(null),
+	}: {
+		class?: string;
+		slide?: Slide | null;
+		children?: Snippet<[{ step: number }]>;
+		steps?: number;
+	} = $props();
 
 	const slide = presentation.registerSlide(steps);
+
+	$effect(() => {
+		slideProp = slide
+	});
 
 	let animating = $state(false);
 	watch(
