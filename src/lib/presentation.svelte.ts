@@ -14,32 +14,31 @@ export class Slide {
 	constructor({ isCurrent, changeSlide, totalSteps }: SlideArgs) {
 		this.#totalSteps = totalSteps;
 
-		$effect.root(() => {
-			useEventListener(
-				() => document,
-				"keydown",
-				(e) => {
-					if (!isCurrent()) return;
+		useEventListener(
+			() => document,
+			"keydown",
+			(e) => {
+				if (!isCurrent()) return;
+				console.log(this.#currentStep, this.#totalSteps);
 
-					if (e.key === "ArrowRight") {
-						if (this.#currentStep >= this.#totalSteps) {
-							changeSlide("next");
-							this.#currentStep = 1;
-						} else {
-							this.#currentStep++;
-						}
+				if (e.key === "ArrowRight") {
+					if (this.#currentStep >= this.#totalSteps) {
+						changeSlide("next");
+						this.#currentStep = 1;
+					} else {
+						this.#currentStep++;
 					}
-					if (e.key === "ArrowLeft") {
-						if (this.#currentStep <= 1) {
-							changeSlide("back");
-							this.#currentStep = 1;
-						} else {
-							this.#currentStep--;
-						}
+				}
+				if (e.key === "ArrowLeft") {
+					if (this.#currentStep <= 1) {
+						changeSlide("back");
+						this.#currentStep = 1;
+					} else {
+						this.#currentStep--;
 					}
-				},
-			);
-		});
+				}
+			},
+		);
 	}
 
 	get totalSteps() {
@@ -52,23 +51,23 @@ export class Slide {
 }
 
 class Presentation {
-	#slideIdx = $state(0);
+	slideIdx = $state(0);
 	#slides: Slide[] = $state([]);
-	currentSlide = $derived(this.#slides[this.#slideIdx]);
+	currentSlide = $derived(this.#slides[this.slideIdx]);
 	totalSlides = $derived(this.#slides.length);
 
 	changeSlide: ChangeSlide = (direction) => {
 		if (direction === "next") {
-			this.#slideIdx = Math.min(this.#slideIdx + 1, this.totalSlides - 1);
+			this.slideIdx = Math.min(this.slideIdx + 1, this.totalSlides - 1);
 		} else {
-			this.#slideIdx = Math.max(this.#slideIdx - 1, 0);
+			this.slideIdx = Math.max(this.slideIdx - 1, 0);
 		}
 	};
 
 	registerSlide(totalSteps: number) {
 		const idx = this.totalSlides;
 		const slide = new Slide({
-			isCurrent: () => this.#slideIdx === idx,
+			isCurrent: () => this.slideIdx === idx,
 			changeSlide: this.changeSlide,
 			totalSteps,
 		});
@@ -76,7 +75,7 @@ class Presentation {
 
 		$effect(() => {
 			return () => {
-				this.#slides.splice(this.#slideIdx, 1);
+				this.#slides.splice(this.slideIdx, 1);
 			};
 		});
 
