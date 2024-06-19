@@ -37,6 +37,8 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/inter": "^5.0.18",
-		"runed": "^0.12.1"
+		"clsx": "^2.1.1",
+		"runed": "^0.12.1",
+		"tailwind-merge": "^2.3.0"
 	}
 }

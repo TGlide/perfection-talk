@@ -36,6 +36,7 @@
 		width: 100vw;
 		height: 100vh;
 		flex-shrink: 0;
+		position: relative;
 
 		transition: 0.25s;
 	}

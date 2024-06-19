@@ -14,7 +14,7 @@
 </script>
 
 <div class="presentation" style="translate: {presentation.slideIdx * -100}vw 0">
-	<Slide steps={5} class="relative grid place-items-center">
+	<Slide steps={5} class="grid place-items-center">
 		{#snippet children({ step })}
 			{#if step >= 2 && step < 4}
 				<div
@@ -82,18 +82,21 @@
 </Slide>
 -->
 
-	<Slide class="grid place-content-center" steps={2}>
+	<Slide class="grid place-content-center" steps={3}>
 		{#snippet children({ step })}
-			<p class="relative text-7xl font-bold">
-				<span class="transition {step === 1 ? 'delay-500' : ''}" style:opacity={step > 1 ? 0.5 : 1}>
-					1. Ferramentas para apps interativas
-				</span>
-				<span
-					class="absolute left-[-1rem] top-1/2 h-4 -translate-y-1/2 shadow
-					{step > 1 ? 'w-[calc(100%+2rem)]' : 'w-0'} bg-white transition-all duration-500"
-				></span>
-			</p>
-			<p class="mt-4 text-7xl font-bold">2. Gerar código otimizado</p>
+			<h1
+				class="absolute left-1/2 {step > 1
+					? 'top-4 text-4xl'
+					: 'top-1/2 -translate-y-1/2 text-9xl'} -translate-x-1/2 text-center font-bold
+				transition-all duration-500"
+			>
+				🎯 Objetivos
+			</h1>
+
+			{#if step > 2}
+				<p transition:fade class="relative text-7xl font-bold">1. Ferramentas para apps interativas</p>
+				<p transition:fade class="mt-4 text-7xl font-bold">2. Gerar código otimizado</p>
+			{/if}
 		{/snippet}
 	</Slide>
 </div>
