@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type Snippet } from "svelte";
-	import { presentation } from "./presentation.svelte";
 	import { watch } from "runed";
+	import { presentation } from "$lib/presentation.svelte";
 
 	const {
 		children,
