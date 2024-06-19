@@ -99,7 +99,6 @@ export function mergeTransitions<El extends HTMLElement | SVGElement>(
 			const withoutDelay = Math.max(0, transpired - delay);
 			const actualT = Math.min(withoutDelay / duration, 1);
 			const easedT = easing(actualT);
-			console.log({duration, delay, transpired, t, actualT})
 
 			return [easedT, 1 - easedT];
 		};

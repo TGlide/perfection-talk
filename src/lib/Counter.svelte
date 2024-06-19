@@ -46,21 +46,14 @@
 		position: relative;
 		padding-block: 60px;
 		margin-block: -60px;
-	}
-
-	.wrapper::after {
-		/* gradient */
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(
+		mask-image: linear-gradient(
 			to bottom,
-			black,
-			black 27.5%,
-			transparent 35%,
-			transparent 65%,
-			black 72.5%,
-			black
+			transparent,
+			transparent 27.5%,
+			black 35%,
+			black 65%,
+			transparent 72.5%,
+			transparent
 		);
 	}
 
