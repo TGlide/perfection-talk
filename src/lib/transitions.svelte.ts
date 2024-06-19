@@ -87,14 +87,19 @@ export function mergeTransitions<El extends HTMLElement | SVGElement>(
 	// We always get the max delay and duration, but will interpolate for minor ones
 	const maxDelay = configs.map((c) => c.delay ?? 0).reduce((a, b) => Math.max(a, b), 0);
 	const maxDuration = configs.map((c) => c.duration ?? 0).reduce((a, b) => Math.max(a, b), 0);
+	const newDuration = maxDuration + maxDelay;
 
 	const merged = configs.reduce((acc, curr) => {
 		const duration = curr.duration ?? 0;
+		const delay = curr.delay ?? 0;
 		const easing = curr.easing ?? linear;
+
 		const getTimingValues = (t: number) => {
-			const transpired = t * maxDuration;
-			const actualT = transpired / duration;
+			const transpired = t * newDuration;
+			const withoutDelay = Math.max(0, transpired - delay);
+			const actualT = Math.min(withoutDelay / duration, 1);
 			const easedT = easing(actualT);
+			console.log({duration, delay, transpired, t, actualT})
 
 			return [easedT, 1 - easedT];
 		};
@@ -113,12 +118,13 @@ export function mergeTransitions<El extends HTMLElement | SVGElement>(
 			curr.tick?.(t, u);
 		};
 
-		return fix(node, () => ({
-			delay: maxDelay,
-			duration: maxDuration,
+		return {
+			delay: 0,
+			duration: newDuration,
 			css,
 			tick,
-		}));
+			easing: linear,
+		};
 	}, {} as TransitionConfig);
 
 	return merged;

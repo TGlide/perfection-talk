@@ -19,7 +19,6 @@ export class Slide {
 			"keydown",
 			(e) => {
 				if (!isCurrent()) return;
-				console.log(this.#currentStep, this.#totalSteps);
 
 				if (e.key === "ArrowRight") {
 					if (this.#currentStep >= this.#totalSteps) {

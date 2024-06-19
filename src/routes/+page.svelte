@@ -48,7 +48,7 @@
 							in:mergeTransitions={(node) => {
 								return [
 									draw(node, { duration: 1000, delay: 1000, easing: cubicOut }),
-									fade(node, { duration: 500, delay: 500, easing: cubicOut }),
+									fade(node, { duration: 100 }),
 								];
 							}}
 							style="stroke:#ff3e00; stroke-width: 1.5; fill: white"
