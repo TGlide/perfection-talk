@@ -7,10 +7,6 @@
 	import Intro from "./(slides)/intro.svelte";
 	import Objectives from "./(slides)/objectives.svelte";
 	import WhoAmI from "./(slides)/who-am-i.svelte";
-
-	$effect(() => {
-		presentation.slideIdx  = 1
-	});
 </script>
 
 <div class="presentation" style="translate: {presentation.slideIdx * -100}vw 0">
