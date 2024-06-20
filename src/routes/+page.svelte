@@ -13,7 +13,7 @@
 
 	// Uncomment to always see last slide
 	// $effect(() => {
-	// presentation.slideIdx = presentation.totalSlides - 1;
+	// 	presentation.slideIdx = 4;
 	// });
 </script>
 
@@ -25,15 +25,19 @@
 	<Experience />
 
 	<Slide class="grid place-content-center">
-		<iframe
-			class="aspect-video w-[1600px] rounded-2xl shadow"
-			src="https://www.youtube.com/embed/AdNJ3fydeao?si=m98hR27Wr29hgMaL"
-			title="YouTube video player"
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-			referrerpolicy="strict-origin-when-cross-origin"
-			allowfullscreen
-		></iframe>
+		{#snippet children({ isCurrent })}
+			<iframe
+				class="aspect-video w-[1600px] rounded-2xl shadow"
+				src="https://www.youtube.com/embed/AdNJ3fydeao?si=m98hR27Wr29hgMaL"
+				title="YouTube video player"
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				referrerpolicy="strict-origin-when-cross-origin"
+				allowfullscreen
+			></iframe>
+
+			<img src="/rich.png" alt="rich" class="absolute bottom-0 left-4 h-[80vh] {isCurrent ? 'delay-1000' : 'rotate-180 opacity-0'} transition-all duration-500 origin-bottom-left" />
+		{/snippet}
 	</Slide>
 
 	<Slide>

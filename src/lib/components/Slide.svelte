@@ -5,7 +5,7 @@
 	import { cn } from "$lib/style";
 
 	type SlideProps = {
-		children?: Snippet<[{ step: number }]>;
+		children?: Snippet<[{ step: number; isCurrent: boolean }]>;
 		steps?: number;
 		slide?: Slide | null;
 		class?: string;
@@ -43,7 +43,7 @@
 	class={cn("relative h-screen w-screen shrink-0 bg-[#171717]", classProp)}
 	data-animating={animating}
 >
-	{@render children?.({ step: slide.step })}
+	{@render children?.({ step: slide.step, isCurrent: presentation.isCurrent(slide) })}
 </div>
 
 <style>
