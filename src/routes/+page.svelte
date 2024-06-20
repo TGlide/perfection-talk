@@ -7,7 +7,6 @@
 	import Intro from "./(slides)/intro.svelte";
 	import Objectives from "./(slides)/objectives.svelte";
 	import WhoAmI from "./(slides)/who-am-i.svelte";
-	import { AnimationFrames } from "runed";
 	import { Link, TwitterLogo } from "phosphor-svelte";
 
 	const DEBUG = true;
@@ -16,21 +15,6 @@
 	// $effect(() => {
 	// presentation.slideIdx = presentation.totalSlides - 1;
 	// });
-
-	const start = Date.now();
-	let now = $state(Date.now());
-
-	new AnimationFrames(() => {
-		now = Date.now();
-	});
-
-	const delta = $derived(now - start);
-	const seconds = $derived(delta / 1000);
-	const minutes = $derived(seconds / 60);
-	const hours = $derived(minutes / 60);
-	const elapsed = $derived(
-		`${hours.toFixed(0).padStart(2, "0")}:${minutes.toFixed(0).padStart(2, "0")}:${seconds.toFixed(0).padStart(2, "0")}`,
-	);
 </script>
 
 <div class="presentation" style="translate: {presentation.slideIdx * -100}vw 0">
@@ -93,7 +77,6 @@
 	<div class="fixed bottom-4 right-4 rounded-md bg-black/50 p-2 font-mono text-white">
 		<p>Slide: {presentation.slideIdx + 1} / {presentation.totalSlides}</p>
 		<p>Step: {presentation.currSlide.step} / {presentation.currSlide.totalSteps}</p>
-		<p>Elapsed: {elapsed}</p>
 	</div>
 {/if}
 

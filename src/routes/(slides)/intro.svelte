@@ -3,13 +3,13 @@
 	import Slide from "$lib/components/Slide.svelte";
 	import { svelteShape } from "../svelte-shape";
 	import { blur, draw, fade, scale } from "svelte/transition";
-	import {expand, fix, mergeTransitions} from "$lib/transitions.svelte";
+	import { expand, fix, mergeTransitions } from "$lib/transitions.svelte";
 	import { quintOut } from "svelte/easing";
 </script>
 
-<Slide steps={5} class="grid place-items-center">
+<Slide steps={6} class="grid place-items-center">
 	{#snippet children({ step })}
-		{#if step >= 2 && step < 4}
+		{#if step >= 2 && step < 5}
 			<div
 				class="flex items-center justify-center gap-6 text-8xl font-black
 					transition duration-500 {step > 2 ? 'opacity-50' : ''}"
@@ -20,17 +20,25 @@
 				anos atrás
 			</div>
 		{/if}
-		{#if step >= 3 && step < 4}
+		<iframe
+			class="{step !== 3 ? 'scale-75 opacity-0' : 'scale-100 opacity-100'}
+			absolute left-1/2 top-1/2 w-[90vw] aspect-video -translate-x-1/2 -translate-y-1/2
+			transition-all rounded-2xl shadow"
+			src="https://pudding.cool/2024/03/greatest-music/"
+			title="pudding"
+		></iframe>
+
+		{#if step >= 4 && step < 5}
 			<img
 				class="absolute left-1/2 top-1/2 size-[240px] -translate-x-1/2 -translate-y-1/2
-					transition-all duration-500 {step > 3 ? 'opacity-50' : ''}"
+					transition-all duration-500 {step > 4 ? 'opacity-50' : ''}"
 				src="/ractive.svg"
 				alt="ractive"
 				in:scale={{ duration: 500 }}
 				out:fade={{ duration: 200 }}
 			/>
 		{/if}
-		{#if step >= 4}
+		{#if step >= 5}
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 103 124"
@@ -55,7 +63,7 @@
 				</g>
 			</svg>
 		{/if}
-		{#if step >= 5}
+		{#if step >= 6}
 			<img
 				class="absolute left-1/2 top-1/2 h-[160px] translate-x-[100px] translate-y-[120px] rounded-xl"
 				src="/pt.png"
