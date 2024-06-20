@@ -9,13 +9,18 @@
 	import "@fontsource/inter/700.css";
 	import "@fontsource/inter/800.css";
 	import "@fontsource/inter/900.css";
+
+	import "@fontsource/fira-code/300.css";
+	import "@fontsource/fira-code/400.css";
+	import "@fontsource/fira-code/500.css";
+	import "@fontsource/fira-code/600.css";
+	import "@fontsource/fira-code/700.css";
 </script>
 
 <svelte:head>
 	<title>Society PT</title>
 </svelte:head>
 
-<div class="text-white h-screen w-screen overflow-hidden">
+<div class="h-screen w-screen overflow-hidden text-white">
 	<slot></slot>
 </div>
-
