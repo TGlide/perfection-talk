@@ -11,7 +11,7 @@ export class Slide {
 }
 
 class Presentation {
-	#slideIdx = $state(0);
+	slideIdx = $state(0);
 	#slides: Slide[] = $state([]);
 	currSlide = $derived(this.#slides[this.slideIdx]);
 	totalSlides = $derived(this.#slides.length);
@@ -42,21 +42,13 @@ class Presentation {
 		});
 	}
 
-	get slideIdx() {
-		return this.#slideIdx;
-	}
-
-	set slideIdx(idx: number) {
-		this.#slideIdx = clamp(0, idx, this.totalSlides - 1);
-	}
-
 	registerSlide(totalSteps: number) {
 		const slide = new Slide(totalSteps);
 		this.#slides.push(slide);
 
 		$effect(() => {
 			return () => {
-				this.#slideIdx = clamp(0, this.#slideIdx, this.totalSlides - 1);
+				this.slideIdx = clamp(0, this.slideIdx, this.totalSlides - 1);
 				this.#slides.splice(this.slideIdx, 1);
 			};
 		});

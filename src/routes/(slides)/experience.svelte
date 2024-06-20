@@ -32,6 +32,7 @@
 	}
 </script>
 
+<!-- brincar com cores -->
 <Slide bind:slide class="grid place-items-center">
 	<p class="text-center text-[#FF3E01]">
 		<span class="font-black uppercase">
@@ -44,7 +45,7 @@
 		<br />
 		<br />
 		<span class="font-black uppercase">
-			<span class="text-[20rem] leading-[16rem]" use:delayed={600}>User</span>
+			<span class="text-[19rem] leading-[16rem]" use:delayed={600}>User</span>
 			<br />
 			<span class="text-9xl" use:delayed={300}>Experience</span>
 		</span>
