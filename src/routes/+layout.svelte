@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-	<title>Society PT</title>
+	<title>Society TALK</title>
 </svelte:head>
 
 <div class="h-screen w-screen overflow-hidden text-white">

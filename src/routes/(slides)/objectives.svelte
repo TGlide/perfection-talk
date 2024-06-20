@@ -8,7 +8,7 @@
 		<h1
 			class="absolute left-1/2 {step > 1
 				? 'top-8 text-6xl'
-				: 'top-1/2 -translate-y-1/2 text-9xl'} -translate-x-1/2 text-center font-bold
+				: 'top-1/2 -translate-y-1/2 text-8xl'} -translate-x-1/2 text-center font-bold
 				transition-all duration-500"
 		>
 			🎯 Objetivos
