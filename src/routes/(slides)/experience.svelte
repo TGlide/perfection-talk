@@ -41,7 +41,7 @@
 			<span class="text-9xl" use:delayed={300}>Experience</span>
 		</span>
 		<br />
-		<span class="text-8xl font-thin" use:delayed={900}>sem sacrificar</span>
+		<span class="text-8xl font-thin" use:delayed={900}>without sacrificing</span>
 		<br />
 		<br />
 		<span class="font-black uppercase">

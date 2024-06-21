@@ -17,7 +17,7 @@
 				out:blur={{ duration: 300 }}
 			>
 				<Counter value={12} />
-				anos atrás
+				years ago
 			</div>
 		{/if}
 		<iframe

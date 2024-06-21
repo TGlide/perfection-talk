@@ -24,7 +24,7 @@
 	<Ticket />
 	<div class="flex flex-col gap-8">
 		<ul class="flex list-disc flex-col gap-4 text-4xl font-bold">
-			<li>Embaixador do Svelte</li>
+			<li>Svelte Ambassador</li>
 			<li>Ex-Significa 🥚</li>
 			<li>Open source maintainer</li>
 		</ul>

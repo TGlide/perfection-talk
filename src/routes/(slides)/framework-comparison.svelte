@@ -26,22 +26,22 @@
 
 			<div class="flex gap-16 text-xl font-bold">
 				<div class="flex flex-col items-center gap-4 text-center">
-					<div class="flex h-[600px] flex-col justify-end">
+					<div class="flex h-[500px] flex-col justify-end">
 						<div
 							class="w-24 rounded-2xl bg-cyan-500 outline outline-2 outline-cyan-700 transition-all duration-500"
-							style:height="{features * 600}px"
+							style:height="{features * 500}px"
 						></div>
 					</div>
 					<p>Features</p>
 				</div>
 				<div class="flex flex-col items-center gap-4 text-center">
-					<div class="flex h-[600px] flex-col justify-end">
+					<div class="flex h-[500px] flex-col justify-end">
 						<div
 							class="w-24 rounded-2xl bg-teal-500 outline outline-2 outline-teal-700 transition-all duration-500"
-							style:height="{efficiency * 600}px"
+							style:height="{efficiency * 500}px"
 						></div>
 					</div>
-					<p>Eficiência</p>
+					<p>Efficiency</p>
 				</div>
 			</div>
 		</div>
@@ -50,23 +50,23 @@
 			<img src="/svelte.svg" alt="svelte" class="relative size-[300px]" />
 			<div class="flex items-end gap-8 text-xl">
 				<div class="flex flex-col items-center gap-4 text-center">
-					<div class="flex h-[600px] flex-col justify-end">
+					<div class="flex h-[500px] flex-col justify-end">
 						<div
 							class="w-24 rounded-2xl bg-[#FF3E01] transition-all delay-300 duration-1000"
-							style:height="{step >= 2 ? 600 : 30}px"
+							style:height="{step >= 2 ? 500 : 30}px"
 						></div>
 					</div>
 					<p>Features</p>
 				</div>
 				<span>❤️</span>
 				<div class="flex flex-col items-center gap-4 text-center">
-					<div class="flex h-[600px] flex-col justify-end">
+					<div class="flex h-[500px] flex-col justify-end">
 						<div
 							class="w-24 rounded-2xl bg-[#FF3E01] transition-all delay-300 duration-1000"
-							style:height="{step >= 2 ? 600 : 30}px"
+							style:height="{step >= 2 ? 500 : 30}px"
 						></div>
 					</div>
-					<p>Eficiência</p>
+					<p>Efficiency</p>
 				</div>
 			</div>
 		</div>

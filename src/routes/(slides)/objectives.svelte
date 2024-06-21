@@ -11,14 +11,14 @@
 				: 'top-1/2 -translate-y-1/2 text-8xl'} -translate-x-1/2 text-center font-bold
 				transition-all duration-500"
 		>
-			🎯 Objetivos
+			🎯 Objectives
 		</h1>
 
 		{#if step > 2}
 			<p transition:blur class="relative text-7xl font-bold">
-				1. Ferramentas para apps interativas
+				1. Toolkit for interactive apps
 			</p>
-			<p transition:blur class="mt-12 text-7xl font-bold">2. Gerar código otimizado</p>
+			<p transition:blur class="mt-12 text-7xl font-bold">2. Generate optimized code</p>
 		{/if}
 	{/snippet}
 </Slide>
