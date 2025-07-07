@@ -27,7 +27,7 @@
 	<Slide class="grid place-content-center">
 		{#snippet children({ isCurrent })}
 			<iframe
-				class="aspect-video w-[1600px] rounded-2xl shadow"
+				class="aspect-video w-[1600px] rounded-2xl shadow-sm"
 				src="https://www.youtube.com/embed/AdNJ3fydeao?si=m98hR27Wr29hgMaL"
 				title="YouTube video player"
 				frameborder="0"
@@ -42,7 +42,7 @@
 
 	<Slide>
 		<iframe
-			class="absolute left-1/2 top-1/2 aspect-video w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow"
+			class="absolute left-1/2 top-1/2 aspect-video w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-sm"
 			src="https://rethinking-reactivity.surge.sh/#slide=29"
 			title="Rethinking Reactivity"
 		>

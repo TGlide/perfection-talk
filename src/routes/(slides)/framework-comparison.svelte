@@ -28,7 +28,7 @@
 				<div class="flex flex-col items-center gap-4 text-center">
 					<div class="flex h-[500px] flex-col justify-end">
 						<div
-							class="w-24 rounded-2xl bg-cyan-500 outline outline-2 outline-cyan-700 transition-all duration-500"
+							class="w-24 rounded-2xl bg-cyan-500 outline-solid outline-2 outline-cyan-700 transition-all duration-500"
 							style:height="{features * 500}px"
 						></div>
 					</div>
@@ -37,7 +37,7 @@
 				<div class="flex flex-col items-center gap-4 text-center">
 					<div class="flex h-[500px] flex-col justify-end">
 						<div
-							class="w-24 rounded-2xl bg-teal-500 outline outline-2 outline-teal-700 transition-all duration-500"
+							class="w-24 rounded-2xl bg-teal-500 outline-solid outline-2 outline-teal-700 transition-all duration-500"
 							style:height="{efficiency * 500}px"
 						></div>
 					</div>
