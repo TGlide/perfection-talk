@@ -7,6 +7,7 @@ export class Slide {
 	totalSteps = $state(0);
 
 	constructor(totalSteps: number) {
+		console.log("Slide", totalSteps);
 		this.totalSteps = totalSteps;
 	}
 
@@ -14,7 +15,7 @@ export class Slide {
 		return {
 			class: cn(
 				"relative h-screen w-screen shrink-0 bg-[#171717] transition",
-				presentation.animating && "scale-95 rounded",
+				presentation.animating && "scale-95 rounded-xl",
 			),
 		};
 	}

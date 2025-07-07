@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Ticket from "$lib/components/Ticket.svelte";
+	import Ticket from "$lib/components/ticket.svelte";
 	import { presentation } from "$lib/presentation.svelte";
 	import { cn } from "$lib/style";
 	import { Star, Download } from "phosphor-svelte";
 
-	const slide = presentation.registerSlide(3);
+	const slide = presentation.registerSlide(1);
 </script>
 
 {#snippet repo({
@@ -38,8 +38,8 @@
 	<div class="flex flex-col gap-8">
 		<ul class="flex list-disc flex-col gap-4 text-4xl font-bold">
 			<li>Svelte Ambassador</li>
-			<li>Ex-Significa 🥚</li>
-			<li>Open source maintainer</li>
+			<li>🤗 Frontend Engineer at Hugging Face</li>
+			<li>Open-source maintainer</li>
 		</ul>
 		<div class="flex items-center gap-8">
 			{@render repo({ src: "/melt.png", alt: "melt", stars: "3k", downloads: "80k" })}

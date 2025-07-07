@@ -1,5 +1,5 @@
 <script>
-	import Counter from "$lib/components/Counter.svelte";
+	import Counter from "$lib/components/counter.svelte";
 	import { svelteShape } from "../svelte-shape";
 	import { blur, draw, fade, scale } from "svelte/transition";
 	import { expand, fix, mergeTransitions } from "$lib/transitions.svelte";

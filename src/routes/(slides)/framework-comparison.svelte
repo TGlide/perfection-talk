@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Interval } from "$lib/Interval.svelte";
+	import { Interval } from "$lib/interval.svelte";
 	import { randomBetween } from "$lib/math";
 	import { presentation } from "$lib/presentation.svelte";
 	import { cn } from "$lib/style";

@@ -37,6 +37,6 @@
 		background: black;
 
 		display: flex;
-		transition: translate 0.5s ease;
+		transition: translate 0.5s 0.25s ease;
 	}
 </style>
