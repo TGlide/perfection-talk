@@ -15,10 +15,13 @@
 	import "@fontsource/fira-code/500.css";
 	import "@fontsource/fira-code/600.css";
 	import "@fontsource/fira-code/700.css";
+	import { presentation } from "$lib/presentation.svelte";
+
+	presentation.init();
 </script>
 
 <svelte:head>
-	<title>Society TALK</title>
+	<title>Porto Talk</title>
 </svelte:head>
 
 <div class="h-screen w-screen overflow-hidden text-white">

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Slide from "$lib/components/Slide.svelte";
-	import { Slide as SlideClass, presentation } from "$lib/presentation.svelte";
+	import { presentation } from "$lib/presentation.svelte";
+	import { cn } from "$lib/style";
 
 	const INITIAL_DELAY = 1000;
 	let delay = INITIAL_DELAY;
@@ -9,7 +9,7 @@
 		delay = INITIAL_DELAY;
 	});
 
-	let slide: SlideClass | null = $state(null);
+	const slide = presentation.registerSlide(1);
 
 	function delayed(node: HTMLElement, duration: number) {
 		delay += duration;
@@ -33,7 +33,7 @@
 </script>
 
 <!-- brincar com cores -->
-<Slide bind:slide class="grid place-items-center">
+<div {...slide.attrs} class={cn(slide.attrs.class, "grid place-items-center")}>
 	<p class="text-center text-[#FF3E01]">
 		<span class="font-black uppercase">
 			<span class="text-[8.4rem] leading-30" use:delayed={300}>Developer</span>
@@ -50,4 +50,4 @@
 			<span class="text-9xl" use:delayed={300}>Experience</span>
 		</span>
 	</p>
-</Slide>
+</div>

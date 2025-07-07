@@ -1,5 +1,6 @@
-import { useEventListener } from "runed";
+import { useEventListener, watch } from "runed";
 import { clamp } from "./math";
+import { cn } from "./style";
 
 export class Slide {
 	step = $state(1);
@@ -7,6 +8,15 @@ export class Slide {
 
 	constructor(totalSteps: number) {
 		this.totalSteps = totalSteps;
+	}
+
+	get attrs() {
+		return {
+			class: cn(
+				"relative h-screen w-screen shrink-0 bg-[#171717] transition",
+				presentation.animating && "scale-95 rounded",
+			),
+		};
 	}
 }
 
@@ -16,30 +26,43 @@ class Presentation {
 	currSlide = $derived(this.#slides[this.slideIdx]);
 	totalSlides = $derived(this.#slides.length);
 
-	constructor() {
-		$effect.root(() => {
-			useEventListener(
-				() => document,
-				"keydown",
-				(e) => {
-					if (!["ArrowRight", "ArrowLeft"].includes(e.key)) return;
-					e.stopPropagation();
+	animating = $state(false);
 
-					const hasNextSlide = this.slideIdx < this.totalSlides - 1;
-					const hasNextStep = this.currSlide.step < this.currSlide.totalSteps;
-					const hasPrevSlide = this.slideIdx > 0;
-					const hasPrevStep = this.currSlide.step > 1;
+	init() {
+		useEventListener(
+			() => document,
+			"keydown",
+			(e) => {
+				if (!["ArrowRight", "ArrowLeft"].includes(e.key)) return;
+				e.stopPropagation();
 
-					if (e.key === "ArrowRight") {
-						if (hasNextStep) this.currSlide.step++;
-						else if (hasNextSlide) this.slideIdx++;
-					} else if (e.key === "ArrowLeft") {
-						if (hasPrevStep) this.currSlide.step--;
-						else if (hasPrevSlide) this.slideIdx--;
-					}
-				},
-			);
-		});
+				const hasNextSlide = this.slideIdx < this.totalSlides - 1;
+				const hasNextStep = this.currSlide.step < this.currSlide.totalSteps;
+				const hasPrevSlide = this.slideIdx > 0;
+				const hasPrevStep = this.currSlide.step > 1;
+
+				if (e.key === "ArrowRight") {
+					if (hasNextStep) this.currSlide.step++;
+					else if (hasNextSlide) this.slideIdx++;
+				} else if (e.key === "ArrowLeft") {
+					if (hasPrevStep) this.currSlide.step--;
+					else if (hasPrevSlide) this.slideIdx--;
+				}
+			},
+		);
+
+		watch(
+			() => this.slideIdx,
+			() => {
+				this.animating = true;
+				const timeout = setTimeout(() => {
+					this.animating = false;
+				}, 750);
+
+				return () => clearTimeout(timeout);
+			},
+			{ lazy: true },
+		);
 	}
 
 	registerSlide(totalSteps: number) {
