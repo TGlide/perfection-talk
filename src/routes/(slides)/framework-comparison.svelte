@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Interval } from "$lib/interval.svelte";
+	import { Interval } from "$lib/spells/interval.svelte";
 	import { randomBetween } from "$lib/math";
-	import { presentation } from "$lib/presentation.svelte";
+	import { presentation } from "$lib/spells/presentation.svelte";
 	import { cn } from "$lib/style";
 
 	const slide = presentation.registerSlide(2);

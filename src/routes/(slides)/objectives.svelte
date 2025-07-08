@@ -1,5 +1,5 @@
 <script>
-	import { presentation } from "$lib/presentation.svelte";
+	import { presentation } from "$lib/spells/presentation.svelte";
 	import { cn } from "$lib/style";
 	import { blur } from "svelte/transition";
 

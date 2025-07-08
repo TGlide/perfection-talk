@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Ticket from "$lib/components/ticket.svelte";
-	import { presentation } from "$lib/presentation.svelte";
+	import { presentation } from "$lib/spells/presentation.svelte";
 	import { cn } from "$lib/style";
 	import { Star, Download } from "phosphor-svelte";
 	import DeviconSvelte from "~icons/devicon/svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { presentation } from "$lib/presentation.svelte";
+	import { presentation } from "$lib/spells/presentation.svelte";
 	import { cn } from "$lib/style";
 
 	const INITIAL_DELAY = 1000;

@@ -1,6 +1,6 @@
 import { useEventListener, watch } from "runed";
-import { clamp } from "./math";
-import { cn } from "./style";
+import { clamp } from "../math";
+import { cn } from "../style";
 import { BroadcastState } from "./broadcast-state.svelte";
 
 export class Slide {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { dev } from "$app/environment";
-	import { presentation } from "$lib/presentation.svelte";
+	import { presentation } from "$lib/spells/presentation.svelte";
 	import Experience from "./(slides)/experience.svelte";
 	import FrameworkComparison from "./(slides)/framework-comparison.svelte";
 	import Intro from "./(slides)/intro.svelte";

@@ -15,7 +15,7 @@
 	import "@fontsource/fira-code/500.css";
 	import "@fontsource/fira-code/600.css";
 	import "@fontsource/fira-code/700.css";
-	import { presentation } from "$lib/presentation.svelte";
+	import { presentation } from "$lib/spells/presentation.svelte";
 
 	presentation.init();
 </script>
