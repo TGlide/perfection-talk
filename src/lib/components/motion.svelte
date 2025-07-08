@@ -103,7 +103,7 @@
 		...rest
 	}: MotionProps = $props();
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// @ts-ignore
 	const shutTsUp = $derived(rest as any);
 
 	let el = $state<El>();
