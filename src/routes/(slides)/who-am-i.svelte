@@ -3,6 +3,9 @@
 	import { presentation } from "$lib/presentation.svelte";
 	import { cn } from "$lib/style";
 	import { Star, Download } from "phosphor-svelte";
+	import DeviconSvelte from "~icons/devicon/svelte";
+	import OcticonMarkGithub16 from "~icons/octicon/mark-github-16";
+	import LogosHuggingFaceIcon from "~icons/logos/hugging-face-icon";
 
 	const slide = presentation.registerSlide(1);
 </script>
@@ -36,14 +39,22 @@
 <div {...slide.attrs} class={cn(slide.attrs.class, "flex items-center justify-center gap-64")}>
 	<Ticket />
 	<div class="flex flex-col gap-8">
-		<ul class="flex list-disc flex-col gap-4 text-4xl font-bold">
-			<li>Svelte Ambassador</li>
-			<li>🤗 Frontend Engineer at Hugging Face</li>
-			<li>Open-source maintainer</li>
+		<ul class="flex flex-col gap-4 text-4xl font-bold">
+			<li class="flex items-center gap-4">
+				<DeviconSvelte /> Svelte Ambassador
+			</li>
+			<li class="flex items-center gap-4">
+				<LogosHuggingFaceIcon />
+				Frontend Developer at Hugging Face
+			</li>
+			<li class="flex items-center gap-4">
+				<OcticonMarkGithub16 />
+				Open-source maintainer
+			</li>
 		</ul>
 		<div class="flex items-center gap-8">
-			{@render repo({ src: "/melt.png", alt: "melt", stars: "3k", downloads: "80k" })}
-			{@render repo({ src: "/runed.png", alt: "runed", stars: "281", downloads: "1k" })}
+			{@render repo({ src: "/melt.png", alt: "melt", stars: "4k", downloads: "100k" })}
+			{@render repo({ src: "/runed.png", alt: "runed", stars: "1.2k", downloads: "224k" })}
 		</div>
 	</div>
 </div>
