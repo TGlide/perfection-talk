@@ -38,6 +38,8 @@ export default [
 			"@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
 			"@typescript-eslint/no-explicit-any": "warn",
 			"@typescript-eslint/ban-ts-comment": "warn",
+			"svelte/require-each-key": "off",
+			"svelte/no-useless-mustaches": "off",
 		},
 	},
 ];
