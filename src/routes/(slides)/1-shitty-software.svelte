@@ -3,20 +3,18 @@
 	import { cn } from "$lib/style";
 	import { animate } from "motion";
 	import type { Attachment } from "svelte/attachments";
-	import { innerWidth } from "svelte/reactivity/window";
 
-	const slide = presentation.registerSlide(3);
-
-	const iw = $derived(innerWidth.current ?? 0);
+	const imgs = ["/shitty-popup.png", "/shitty-popup.png", "/shitty-popup.png", "/shitty-popup.png"];
+	const slide = presentation.registerSlide(imgs.length + 2);
 
 	const animateTrash: Attachment<HTMLElement> = (node) => {
 		animate(
 			node,
 			{
-				opacity: slide.step < 3 ? 0 : 1,
+				opacity: slide.step < slide.totalSteps ? 0 : 1,
 			},
 			{
-				duration: slide.step < 3 ? 0.1 : 0.2,
+				duration: slide.step < slide.totalSteps ? 0.1 : 0.2,
 			},
 		);
 	};
@@ -43,80 +41,75 @@
 	<div
 		class="absolute inset-0 z-10"
 		{@attach (node) => {
-			if (slide.step === 2) {
-				animate(
-					node,
-					{
-						y: 0,
-					},
-					{ ...springOpts, delay: 0.13 },
-				);
-			}
-			if (slide.step === 3) {
-				animate(
-					node,
-					{
-						y: 450,
-					},
-					{ ...springOpts, delay: 0.13 },
-				);
-			}
+			animate(
+				node,
+				{
+					y: slide.step === slide.totalSteps ? 450 : 0,
+				},
+				{ ...springOpts, delay: 0.13 },
+			);
 		}}
 	>
-		<img
-			src="/shitty-popup.png"
-			alt="shitty popup"
-			class="absolute top-1/2 left-1/2 rounded-2xl object-cover opacity-0 shadow-lg"
-			{@attach (node) => {
-				if (slide.step === 1) {
-					animate(
-						node,
-						{
-							width: iw * 0.7,
-							// height: (iw * 9) / 9,
-							x: "-50%",
-							y: "-50%",
-							scale: 0.9,
-							rotate: 0,
-							opacity: 0,
-							transformOrigin: "center",
-						},
-						{
-							...springOpts,
-						},
-					);
-				} else if (slide.step === 2) {
-					animate(
-						node,
-						{
-							// height: (iw * 9) / 16,
-							x: "-50%",
-							y: "-50%",
+		{#each imgs as img, i}
+			<img
+				src={img}
+				alt="shitty popup"
+				class="absolute top-1/2 left-1/2 w-[70vw] rounded-2xl object-cover opacity-0 shadow-lg"
+				{@attach (node) => {
+					const stepToAnimate = 2 + i;
+					if (slide.step < stepToAnimate) {
+						animate(
+							node,
+							{
+								// height: (iw * 9) / 9,
+								x: "-50%",
+								y: i === 0 ? "-45%" : "80%",
+								scale: i === 0 ? 0.9 : 1,
+								rotate: 0,
+								opacity: i === 0 ? 0 : 1,
+							},
+							{
+								...springOpts,
+							},
+						);
+					} else if (slide.step >= stepToAnimate && slide.step < slide.totalSteps) {
+						const offset = slide.step - 2 - i;
+						console.log({ i, offset });
+						animate(
+							node,
+							{
+								// height: (iw * 9) / 16,
+								x: "-50%",
+								// y: `-${50 + offset * 3}%`,
+								y: `-50%`,
 
-							scale: 1,
-							rotate: 0,
-							opacity: 1,
-							transformOrigin: "center",
-						},
-						{
-							...springOpts,
-						},
-					);
-					return;
-				} else if (slide.step === 3) {
-					animate(
-						node,
-						{
-							rotate: 70,
-							opacity: 1,
-							y: "-55%",
-							scale: 0.125,
-						},
-						{ ...springOpts },
-					);
-				}
-			}}
-		/>
+								scale: 1 - offset * 0.025,
+								rotate: [0, 2, -3, 4][i],
+								opacity: 1,
+								filter: `brightness(${1 - offset * 0.2})`,
+							},
+							{
+								...springOpts,
+								// delay: i === 0 ? 0 : 0.05,
+							},
+						).then(() => {
+							console.log("done", i);
+						});
+					} else if (slide.step === slide.totalSteps) {
+						animate(
+							node,
+							{
+								rotate: [70, -70, -60, 80][i],
+								opacity: 1,
+								y: "-55%",
+								scale: 0.125,
+							},
+							{ ...springOpts },
+						);
+					}
+				}}
+			/>
+		{/each}
 	</div>
 
 	<div class="abs-x-center absolute bottom-6 z-20 w-60 opacity-0" {@attach animateTrash}>

@@ -6,7 +6,6 @@ export class BroadcastState<T> {
 		this.#state = value;
 		this.#channel = new BroadcastChannel(name);
 		this.#channel.addEventListener("message", (e) => {
-			console.log("Receiving", e.data);
 			this.#state = e.data;
 		});
 	}

@@ -44,7 +44,7 @@
 		"@fontsource/inter": "^5.0.18",
 		"@tailwindcss/vite": "^4.1.11",
 		"clsx": "^2.1.1",
-		"motion": "^12.23.0",
+		"motion": "^12.23.5",
 		"runed": "^0.29.2",
 		"tailwind-merge": "^2.3.0",
 		"unplugin-icons": "^22.1.0"
