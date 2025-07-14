@@ -80,7 +80,7 @@
 
 	type MotionProps = {
 		tag: Tag;
-		children: Snippet;
+		children?: Snippet;
 		initial?: DOMKeyframesDefinition;
 		animate?: DOMKeyframesDefinition;
 		exit?: DOMKeyframesDefinition;

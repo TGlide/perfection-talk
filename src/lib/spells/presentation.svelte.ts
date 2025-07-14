@@ -34,7 +34,7 @@ class Presentation {
 	// prettier-ignore
 	set slideIdx(value) {	this.#slideIdx.current = value }
 
-	#slides: Slide[] = $state([]);
+	#slides: Array<Slide | null> = $state([]);
 	currSlide = $derived(this.#slides[this.slideIdx]);
 	totalSlides = $derived(this.#slides.length);
 
@@ -46,6 +46,7 @@ class Presentation {
 			"keydown",
 			(e) => {
 				if (!["ArrowRight", "ArrowLeft"].includes(e.key)) return;
+				if (!this.currSlide) return;
 				e.stopPropagation();
 
 				const hasNextSlide = this.slideIdx < this.totalSlides - 1;
@@ -78,13 +79,20 @@ class Presentation {
 	}
 
 	registerSlide(totalSteps: number) {
+		// const idx should be equal to the length of the array if
+		// the array has no null values, otherwise it should be the
+		// index of the first null value
+		// This is to fix inconsistentincies with HMR
+		const nullIdx = this.#slides.findIndex((slide) => slide === null);
+		const idx = nullIdx === -1 ? this.#slides.length : nullIdx;
+
 		const slide = new Slide(this.#slides.length, totalSteps);
-		this.#slides.push(slide);
+		this.#slides.splice(idx, 1, slide);
 
 		$effect(() => {
 			return () => {
-				this.slideIdx = clamp(0, this.slideIdx, this.totalSlides - 1);
-				this.#slides.splice(this.slideIdx, 1);
+				console.log("deleting slide", idx);
+				this.#slides[idx] = null;
 			};
 		});
 

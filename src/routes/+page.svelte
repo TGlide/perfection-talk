@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { dev } from "$app/environment";
 	import { presentation } from "$lib/spells/presentation.svelte";
+	import ShittySoftware from "./(slides)/1-shitty-software.svelte";
 	import WhoAmI from "./(slides)/2-who-am-i.svelte";
 
 	const DEBUG = true;
@@ -12,6 +13,7 @@
 </script>
 
 <div class="presentation" style="translate: {presentation.slideIdx * -100}vw 0">
+	<ShittySoftware />
 	<WhoAmI />
 </div>
 

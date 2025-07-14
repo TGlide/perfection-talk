@@ -1,9 +1,9 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --font-sans: Inter, sans-serif;
-  --font-significa: Significa Sans, sans-serif;
-  --font-mono: Fira Code, monospace;
+	--font-sans: Inter, sans-serif;
+	--font-significa: Significa Sans, sans-serif;
+	--font-mono: Fira Code, monospace;
 }
 
 /*
@@ -15,13 +15,13 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
 }
 
 @font-face {
@@ -58,4 +58,16 @@
 	--font-significa: "Significa Sans", sans-serif;
 	--font-inter: "Inter", sans-serif;
 	--font-mono: "Fira Code", monospace;
+}
+
+@utility abs-x-center {
+	@apply left-1/2 -translate-x-1/2;
+}
+
+@utility abs-y-center {
+	@apply top-1/2 -translate-y-1/2;
+}
+
+@utility abs-center {
+	@apply abs-x-center abs-y-center;
 }
