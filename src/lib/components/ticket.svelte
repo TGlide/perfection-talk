@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { spring } from "svelte/motion";
+	import { Spring } from "svelte/motion";
 	import { fade } from "svelte/transition";
 	import BgRainbow from "../assets/ticket-bg-rainbow.svg";
 	import Svelte from "../assets/svelte.svg";
+	import type { Attachment } from "svelte/attachments";
+	import { on } from "svelte/events";
 
 	type ContributionsMatrix = number[][];
 	function getMockContributions() {
@@ -28,21 +30,8 @@
 		contributions?: number[];
 	};
 
-	type Scale = [number, number];
-
-	/**
-	 * Function that, given a number and two scales,
-	 * converts that number from the first scale to the second scale.
-	 *
-	 * @example `number` 3, `from` { lower: 0, upper: 10 },
-	 * `to` { lower: 0, upper: 100 } => `number` 30
-	 */
-	function toScale(value: number, from: Scale, to: Scale): number {
-		return ((value - from[0]) * (to[1] - to[0])) / (from[1] - from[0]) + to[0];
-	}
-
 	const variant = "rainbow";
-	const { name, gh_user, id, show_contributions }: TicketData = {
+	const { name, gh_user, show_contributions }: TicketData = {
 		name: "Thomas G. Lopes",
 		gh_user: "tglide",
 		id: 1,
@@ -51,17 +40,19 @@
 	const bg = BgRainbow;
 
 	/* Animation details */
-	let removeDelay = false;
-	$: if (!show_contributions) {
-		removeDelay = true;
-	}
+	let removeDelay = $state(false);
+	$effect(() => {
+		if (!show_contributions) {
+			removeDelay = true;
+		}
+	});
 
 	const springR = { stiffness: 0.066, damping: 0.25 };
 
-	let springRotate = spring({ x: 0, y: 0 }, springR);
-	let springGlare = spring({ x: 50, y: 50, o: 0.25 }, springR);
-	let springBackground = spring({ x: 50, y: 50 }, springR);
-	let hovering = false;
+	let springRotate = new Spring({ x: 0, y: 0 }, springR);
+	let springGlare = new Spring({ x: 50, y: 50, o: 0.25 }, springR);
+	let springBackground = new Spring({ x: 50, y: 50 }, springR);
+	let hovering = $state(false);
 
 	const round = (num: number, fix = 3) => parseFloat(num.toFixed(fix));
 	const clamp = (num: number, min = -20, max = 20) => Math.min(Math.max(num, min), max);
@@ -79,116 +70,114 @@
 		return e.type === "touchmove";
 	}
 
-	function mouse(node: HTMLElement) {
-		const mouseMove = (e: MouseEvent) => {
-			const clientX = isTouchEvent(e) ? e.touches[0].clientX : e.clientX;
-			const clientY = isTouchEvent(e) ? e.touches[0].clientY : e.clientY;
+	const mouse: Attachment<HTMLElement> = (node: HTMLElement) => {
+		const offs = [
+			on(node, "mousemove", (e: MouseEvent) => {
+				const clientX = isTouchEvent(e) ? e.touches[0].clientX : e.clientX;
+				const clientY = isTouchEvent(e) ? e.touches[0].clientY : e.clientY;
 
-			const el = e.target as HTMLElement;
-			const rect = el.getBoundingClientRect(); // get element's current size/position
-			const absolute = {
-				x: clientX - rect.left, // get mouse position from left
-				y: clientY - rect.top, // get mouse position from right
-			};
-			const percent = {
-				x: round((100 / rect.width) * absolute.x),
-				y: round((100 / rect.height) * absolute.y),
-			};
-			const center = {
-				x: percent.x - 50,
-				y: percent.y - 50,
-			};
+				const el = e.target as HTMLElement;
+				const rect = el.getBoundingClientRect(); // get element's current size/position
+				const absolute = {
+					x: clientX - rect.left, // get mouse position from left
+					y: clientY - rect.top, // get mouse position from right
+				};
+				const percent = {
+					x: round((100 / rect.width) * absolute.x),
+					y: round((100 / rect.height) * absolute.y),
+				};
+				const center = {
+					x: percent.x - 50,
+					y: percent.y - 50,
+				};
 
-			springRotate.stiffness = springR.stiffness;
-			springRotate.damping = springR.damping;
-			springRotate.set({
-				x: round(-(center.x / 7)),
-				y: round(center.y / 10),
-			});
+				springRotate.stiffness = springR.stiffness;
+				springRotate.damping = springR.damping;
+				springRotate.set({
+					x: round(-(center.x / 7)),
+					y: round(center.y / 10),
+				});
 
-			springGlare.stiffness = springR.stiffness;
-			springGlare.damping = springR.damping;
-			springGlare.set({
-				x: percent.x,
-				y: percent.y,
-				o: 1,
-			});
+				springGlare.stiffness = springR.stiffness;
+				springGlare.damping = springR.damping;
+				springGlare.set({
+					x: percent.x,
+					y: percent.y,
+					o: 1,
+				});
 
-			springBackground.stiffness = springR.stiffness;
-			springBackground.damping = springR.damping;
-			springBackground.set({
-				x: adjust(percent.x, 0, 100, 37, 63),
-				y: adjust(percent.y, 0, 100, 33, 67),
-			});
+				springBackground.stiffness = springR.stiffness;
+				springBackground.damping = springR.damping;
+				springBackground.set({
+					x: adjust(percent.x, 0, 100, 37, 63),
+					y: adjust(percent.y, 0, 100, 33, 67),
+				});
 
-			hovering = true;
+				hovering = true;
+			}),
+
+			on(node, "mouseleave", () => {
+				const snapStiff = 0.05;
+				const snapDamp = 0.5;
+
+				springRotate.stiffness = snapStiff;
+				springRotate.damping = snapDamp;
+				springRotate.set({ x: 0, y: 0 });
+
+				springGlare.stiffness = snapStiff;
+				springGlare.damping = snapDamp;
+				springGlare.set({ x: 50, y: 50, o: 0 });
+
+				springBackground.stiffness = snapStiff;
+				springBackground.damping = snapDamp;
+				springBackground.set({ x: 50, y: 50 }, { soft: 1 });
+
+				hovering = false;
+			}),
+		];
+
+		return () => {
+			offs.forEach((off) => off());
 		};
-		const mouseLeave = () => {
-			const snapStiff = 0.05;
-			const snapDamp = 0.5;
+	};
 
-			springRotate.stiffness = snapStiff;
-			springRotate.damping = snapDamp;
-			springRotate.set({ x: 0, y: 0 });
-
-			springGlare.stiffness = snapStiff;
-			springGlare.damping = snapDamp;
-			springGlare.set({ x: 50, y: 50, o: 0 });
-
-			springBackground.stiffness = snapStiff;
-			springBackground.damping = snapDamp;
-			springBackground.set({ x: 50, y: 50 }, { soft: 1 });
-
-			hovering = false;
-		};
-
-		node.addEventListener("mousemove", mouseMove);
-		node.addEventListener("mouseleave", mouseLeave);
-
-		return {
-			destroy() {
-				node.removeEventListener("mousemove", mouseMove);
-				node.removeEventListener("mouseleave", mouseLeave);
-			},
-		};
-	}
-
-	$: styles = `
-		--rx: ${$springRotate.x}deg;
-		--ry: ${$springRotate.y}deg;
+	const styles = $derived(`
+		--rx: ${springRotate.current.x}deg;
+		--ry: ${springRotate.current.y}deg;
         --opacity: ${hovering ? 1 : 0};
-        --mx: ${$springGlare.x}%;
-		--my: ${$springGlare.y}%;
-        --pointer-x: ${$springGlare.x}%;
-        --pointer-y: ${$springGlare.y}%;
-        --pointer-from-top: ${$springGlare.y / 100};
-        --pointer-from-left: ${$springGlare.x / 100};
-		--o: ${$springGlare.o};
-        --card-opacity: ${$springGlare.o};
+        --mx: ${springGlare.current.x}%;
+		--my: ${springGlare.current.y}%;
+        --pointer-x: ${springGlare.current.x}%;
+        --pointer-y: ${springGlare.current.y}%;
+        --pointer-from-top: ${springGlare.current.y / 100};
+        --pointer-from-left: ${springGlare.current.x / 100};
+		--o: ${springGlare.current.o};
+        --card-opacity: ${springGlare.current.o};
         --pointer-from-center: ${clamp(
 					Math.sqrt(
-						($springGlare.y - 50) * ($springGlare.y - 50) +
-							($springGlare.x - 50) * ($springGlare.x - 50),
+						(springGlare.current.y - 50) * (springGlare.current.y - 50) +
+							(springGlare.current.x - 50) * (springGlare.current.x - 50),
 					) / 50,
 					0,
 					1,
 				)};
 
-        --background-x: ${$springBackground.x}%;
-        --background-y: ${$springBackground.y}%;
-	`;
+        --background-x: ${springBackground.current.x}%;
+        --background-y: ${springBackground.current.y}%;
+	`);
 </script>
 
 <div class="wrapper font-significa">
-	<div class="ticket" data-variant={variant} use:mouse style={styles}>
+	<div class="ticket" data-variant={variant} {@attach mouse} style={styles}>
 		<img src={bg} alt="" class="bg" />
 		<p class="web-title web-u-color-text-primary">{name?.trim() || "-"}</p>
 		{#if gh_user}
 			<p class="web-label">@{gh_user}</p>
 		{/if}
-		<div class="bottom-left">
+		<div class="bottom-left flex flex-col">
 			<!-- <img src={Logo} alt="init_" /> -->
-			<span>JUN 20</span>
+			<span>JUL 17</span>
+			<span>{"<frontend.OPO/>"}</span>
 		</div>
 
 		<img class="tribe" src={Svelte} alt="Svelte" />
@@ -230,7 +219,7 @@
 	$base-width: 28.75;
 
 	@function adjusted($value) {
-		@return #{$value }rem;
+		@return #{$value}rem;
 	}
 
 	.frufru {
@@ -245,7 +234,8 @@
 
 	.shine,
 	.glare {
-		will-change: transform, opacity, background-image, background-size, background-position,
+		will-change:
+			transform, opacity, background-image, background-size, background-position,
 			background-blend-mode, filter;
 		border-radius: adjusted(1);
 		border-bottom-left-radius: adjusted(1.2);
@@ -347,16 +337,6 @@
 		perspective: 600px;
 	}
 
-	.glow {
-		position: absolute;
-		inset-block-start: adjusted(-12);
-		inset-inline-end: adjusted(-12);
-		max-inline-size: unset;
-		max-block-size: unset;
-		inline-size: 160%;
-		z-index: -1;
-	}
-
 	.ticket {
 		--base-width-default: 460px;
 		width: var(--base-width, var(--base-width-default));
@@ -407,30 +387,9 @@
 		flex-direction: column;
 		gap: adjusted(0.5);
 
-		img {
-			width: adjusted(5.6875);
-		}
-
 		span {
 			font-family: var(--font-mono);
 			color: hsl(var(--web-color-primary));
-			font-size: adjusted(0.875);
-			font-style: normal;
-			font-weight: 400;
-			line-height: 114.286%;
-		}
-	}
-
-	.id {
-		position: absolute;
-		inset-block-end: adjusted(2);
-		inset-inline-end: adjusted(2);
-		display: grid;
-		place-items: center;
-
-		span {
-			color: rgba(255, 255, 255, 0.5);
-			font-family: var(--font-mono);
 			font-size: adjusted(0.875);
 			font-style: normal;
 			font-weight: 400;
