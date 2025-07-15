@@ -1,45 +1,64 @@
-import js from "@eslint/js";
-import ts from "typescript-eslint";
-import svelte from "eslint-plugin-svelte";
 import prettier from "eslint-config-prettier";
+import js from "@eslint/js";
+import { includeIgnoreFile } from "@eslint/compat";
+import svelte from "eslint-plugin-svelte";
 import globals from "globals";
+import { fileURLToPath } from "node:url";
+import ts from "typescript-eslint";
+import svelteConfig from "./svelte.config.js";
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
-export default [
+const gitignorePath = fileURLToPath(new URL("./.gitignore", import.meta.url));
+
+export default ts.config(
+	includeIgnoreFile(gitignorePath),
 	js.configs.recommended,
 	...ts.configs.recommended,
-	...svelte.configs["flat/recommended"],
+	...svelte.configs.recommended,
 	prettier,
-	...svelte.configs["flat/prettier"],
+	...svelte.configs.prettier,
 	{
 		languageOptions: {
-			globals: {
-				...globals.browser,
-				...globals.node,
-			},
+			globals: { ...globals.browser, ...globals.node },
+		},
+		rules: {
+			"no-undef": "off",
+			"@typescript-eslint/no-unused-vars": [
+				"error",
+				{
+					varsIgnorePattern: "^_",
+					argsIgnorePattern: "^_",
+				},
+			],
+			"no-restricted-imports": [
+				"error",
+				{
+					patterns: [
+						{
+							group: ["*/_generated/server"],
+							importNames: ["mutation", "internalMutation"],
+							message: "Use functions.ts for mutation",
+						},
+					],
+				},
+			],
+			"svelte/require-each-key": "off",
+			"@typescript-eslint/no-explicit-any": "warn",
+			"@typescript-eslint/ban-ts-comment": "warn",
+			"svelte/no-useless-mustaches": "off",
 		},
 	},
 	{
-		files: ["**/*.svelte"],
+		files: ["**/*.svelte", "**/*.svelte.ts", "**/*.svelte.js"],
 		languageOptions: {
 			parserOptions: {
+				projectService: true,
+				extraFileExtensions: [".svelte"],
 				parser: ts.parser,
+				svelteConfig,
 				svelteFeatures: {
 					experimentalGenerics: true,
 				},
 			},
 		},
 	},
-	{
-		ignores: ["build/", ".svelte-kit/", "dist/"],
-	},
-	{
-		rules: {
-			"@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-			"@typescript-eslint/no-explicit-any": "warn",
-			"@typescript-eslint/ban-ts-comment": "warn",
-			"svelte/require-each-key": "off",
-			"svelte/no-useless-mustaches": "off",
-		},
-	},
-];
+);

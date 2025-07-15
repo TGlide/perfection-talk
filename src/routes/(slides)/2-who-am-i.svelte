@@ -51,6 +51,7 @@
 				<OcticonMarkGithub16 />
 				Open-source maintainer
 			</li>
+			<li class="flex items-center gap-4">💩 Also writes crappy software</li>
 		</ul>
 		<div class="flex items-center gap-8">
 			{@render repo({ src: "/melt.png", alt: "melt", stars: "4k", downloads: "100k" })}

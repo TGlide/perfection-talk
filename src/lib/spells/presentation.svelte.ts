@@ -1,19 +1,11 @@
 import { useEventListener, watch } from "runed";
-import { clamp } from "../math";
 import { cn } from "../style";
-import { BroadcastState } from "./broadcast-state.svelte";
 
 export class Slide {
-	#step: BroadcastState<number>;
-	// prettier-ignore
-	get step() {	return this.#step.current	}
-	// prettier-ignore
-	set step(value) {	this.#step.current = value }
-
+	step = $state(1);
 	totalSteps = $state(0);
 
 	constructor(idx: number, totalSteps: number) {
-		this.#step = new BroadcastState(`slide-${idx}-step`, 1);
 		this.totalSteps = totalSteps;
 	}
 
@@ -28,11 +20,7 @@ export class Slide {
 }
 
 class Presentation {
-	#slideIdx = new BroadcastState("slide-idx", 0);
-	// prettier-ignore
-	get slideIdx() {	return this.#slideIdx.current	}
-	// prettier-ignore
-	set slideIdx(value) {	this.#slideIdx.current = value }
+	slideIdx = $state(0);
 
 	#slides: Array<Slide | null> = $state([]);
 	currSlide = $derived(this.#slides[this.slideIdx]);
@@ -91,7 +79,6 @@ class Presentation {
 
 		$effect(() => {
 			return () => {
-				console.log("deleting slide", idx);
 				this.#slides[idx] = null;
 			};
 		});

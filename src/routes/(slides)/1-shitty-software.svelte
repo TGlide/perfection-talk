@@ -3,8 +3,16 @@
 	import { cn } from "$lib/style";
 	import { animate } from "motion";
 	import type { Attachment } from "svelte/attachments";
+	import { innerHeight } from "svelte/reactivity/window";
 
-	const imgs = ["/shitty-popup.png", "/shitty-popup.png", "/shitty-popup.png", "/shitty-popup.png"];
+	const imgs = [
+		"/shitty-popup.png",
+		"/shitty-notes.png",
+		"/shitty-toasts.png",
+		"/shitty-github.png",
+		"/jira.png", // shitty is implicit here. everyone knows jira is shitty
+		"/shitty-figma.png",
+	];
 	const slide = presentation.registerSlide(imgs.length + 2);
 
 	const animateTrash: Attachment<HTMLElement> = (node) => {
@@ -14,7 +22,8 @@
 				opacity: slide.step < slide.totalSteps ? 0 : 1,
 			},
 			{
-				duration: slide.step < slide.totalSteps ? 0.1 : 0.2,
+				duration: 0.1,
+				delay: slide.step < slide.totalSteps ? 0 : 0.1,
 			},
 		);
 	};
@@ -46,7 +55,7 @@
 				{
 					y: slide.step === slide.totalSteps ? 450 : 0,
 				},
-				{ ...springOpts, delay: 0.13 },
+				{ ...springOpts, delay: 0.23 },
 			);
 		}}
 	>
@@ -54,7 +63,7 @@
 			<img
 				src={img}
 				alt="shitty popup"
-				class="absolute top-1/2 left-1/2 w-[70vw] rounded-2xl object-cover opacity-0 shadow-lg"
+				class="absolute top-1/2 left-1/2 w-[80vw] rounded-2xl object-cover opacity-0 shadow-lg"
 				{@attach (node) => {
 					const stepToAnimate = 2 + i;
 					if (slide.step < stepToAnimate) {
@@ -63,7 +72,7 @@
 							{
 								// height: (iw * 9) / 9,
 								x: "-50%",
-								y: i === 0 ? "-45%" : "80%",
+								y: i === 0 ? "-45%" : innerHeight.current,
 								scale: i === 0 ? 0.9 : 1,
 								rotate: 0,
 								opacity: i === 0 ? 0 : 1,
@@ -74,17 +83,16 @@
 						);
 					} else if (slide.step >= stepToAnimate && slide.step < slide.totalSteps) {
 						const offset = slide.step - 2 - i;
-						console.log({ i, offset });
 						animate(
 							node,
 							{
 								// height: (iw * 9) / 16,
 								x: "-50%",
-								// y: `-${50 + offset * 3}%`,
-								y: `-50%`,
+								y: `-${50 + offset * 3}%`,
+								// y: `-50%`,
 
 								scale: 1 - offset * 0.025,
-								rotate: [0, 2, -3, 4][i],
+								rotate: [0, 1, -2.5, 1.5, 0.5, -0.25, 0.3][i],
 								opacity: 1,
 								filter: `brightness(${1 - offset * 0.2})`,
 							},
@@ -92,17 +100,15 @@
 								...springOpts,
 								// delay: i === 0 ? 0 : 0.05,
 							},
-						).then(() => {
-							console.log("done", i);
-						});
+						);
 					} else if (slide.step === slide.totalSteps) {
 						animate(
 							node,
 							{
-								rotate: [70, -70, -60, 80][i],
+								rotate: [70, -70, -60, 80, 50, -80, -50][i],
 								opacity: 1,
 								y: "-55%",
-								scale: 0.125,
+								scale: 0.1,
 							},
 							{ ...springOpts },
 						);
