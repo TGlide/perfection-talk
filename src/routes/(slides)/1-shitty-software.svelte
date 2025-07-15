@@ -7,8 +7,9 @@
 
 	const imgs = [
 		"/shitty-popup.png",
-		"/shitty-notes.png",
+		"/shitty-chat.png",
 		"/shitty-toasts.png",
+		"/shitty-notes.png",
 		"/shitty-github.png",
 		"/jira.png", // shitty is implicit here. everyone knows jira is shitty
 		"/shitty-figma.png",
@@ -63,7 +64,7 @@
 			<img
 				src={img}
 				alt="shitty popup"
-				class="absolute top-1/2 left-1/2 w-[80vw] rounded-2xl object-cover opacity-0 shadow-lg"
+				class="absolute top-1/2 left-1/2 max-h-[80vh] max-w-[80vw] rounded-2xl object-cover opacity-0 shadow-lg"
 				{@attach (node) => {
 					const stepToAnimate = 2 + i;
 					if (slide.step < stepToAnimate) {
