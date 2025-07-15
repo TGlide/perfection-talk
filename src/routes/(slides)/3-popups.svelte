@@ -163,22 +163,22 @@
 
 <style>
 	@keyframes sparkle {
-		0% {
+		0%, 70% {
 			opacity: 0;
 			transform: scale(0) translateY(0px);
 			background: hsl(16, 100%, 60%);
 		}
-		20% {
+		75% {
 			opacity: 1;
 			transform: scale(1) translateY(-10px);
 			background: hsl(20, 100%, 65%);
 		}
-		50% {
+		85% {
 			opacity: 0.8;
 			transform: scale(0.8) translateY(-25px);
 			background: hsl(28, 100%, 70%);
 		}
-		80% {
+		95% {
 			opacity: 0.4;
 			transform: scale(0.4) translateY(-40px);
 			background: hsl(36, 100%, 75%);
