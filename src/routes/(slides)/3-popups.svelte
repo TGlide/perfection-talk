@@ -33,17 +33,17 @@
 				width,
 				maxHeight: Math.max(maxHeight, 100), // Minimum height
 				color,
-				duration: randomBetween(1500, 2500),
+				duration: randomBetween(2000, 3000),
 				delay: randomBetween(0, 1000),
 			};
 		});
 	};
 
 	const flameLayers = $derived({
-		red: generateFlames(15, '#e20f00', 0, 48),
-		orange: generateFlames(12, '#ff9c00', 1, 48),
-		yellow: generateFlames(8, '#ffeb6e', 2, 48),
-		white: generateFlames(6, '#fef1d9', 3, 32),
+		red: generateFlames(Math.ceil(winSize.w / 64) || 30, '#e20f00', 0, 64),
+		orange: generateFlames(Math.ceil(winSize.w / 80) || 24, '#ff9c00', 1, 64),
+		yellow: generateFlames(Math.ceil(winSize.w / 100) || 19, '#ffeb6e', 2, 64),
+		white: generateFlames(Math.ceil(winSize.w / 140) || 14, '#fef1d9', 3, 48),
 	});
 </script>
 
@@ -218,19 +218,19 @@
 			transform: scaleY(1);
 		}
 		28% {
-			transform: scaleY(0.7);
+			transform: scaleY(0.85);
 		}
 		38% {
-			transform: scaleY(0.8);
+			transform: scaleY(0.9);
 		}
 		50% {
-			transform: scaleY(0.6);
+			transform: scaleY(0.8);
 		}
 		70% {
 			transform: scaleY(0.95);
 		}
 		82% {
-			transform: scaleY(0.58);
+			transform: scaleY(0.88);
 		}
 		100% {
 			transform: scaleY(1);
@@ -239,7 +239,7 @@
 
 	.flame {
 		height: var(--max-height);
-		border-radius: 48px;
+		border-radius: 64px 64px 0 0;
 		transform-origin: bottom center;
 		animation: flicker infinite ease-in-out alternate;
 		opacity: 0.9;
