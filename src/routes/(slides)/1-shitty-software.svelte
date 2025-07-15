@@ -6,13 +6,13 @@
 	import { innerHeight } from "svelte/reactivity/window";
 
 	const imgs = [
-		"/shitty-popup.png",
-		"/shitty-chat.png",
-		"/shitty-toasts.png",
-		"/shitty-notes.png",
-		"/shitty-github.png",
-		"/jira.png", // shitty is implicit here. everyone knows jira is shitty
-		"/shitty-figma.png",
+		"/imgs/shitty-popup.png",
+		"/imgs/shitty-chat.png",
+		"/imgs/shitty-toasts.png",
+		"/imgs/shitty-notes.png",
+		"/imgs/shitty-github.png",
+		"/imgs/jira.png", // shitty is implicit here. everyone knows jira is shitty
+		"/imgs/shitty-figma.png",
 	];
 	const slide = presentation.registerSlide(imgs.length + 2);
 

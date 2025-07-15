@@ -54,8 +54,8 @@
 			<li class="flex items-center gap-4">💩 Also writes crappy software</li>
 		</ul>
 		<div class="flex items-center gap-8">
-			{@render repo({ src: "/melt.png", alt: "melt", stars: "4k", downloads: "100k" })}
-			{@render repo({ src: "/runed.png", alt: "runed", stars: "1.2k", downloads: "224k" })}
+			{@render repo({ src: "/imgs/melt.png", alt: "melt", stars: "4k", downloads: "100k" })}
+			{@render repo({ src: "/imgs/runed.png", alt: "runed", stars: "1.2k", downloads: "224k" })}
 		</div>
 	</div>
 </div>
