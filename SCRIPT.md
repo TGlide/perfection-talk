@@ -22,6 +22,42 @@ But I'm personally not comfortable with that. I think humanity is at its best wh
 
 # Introduce myself
 
-My name is Thomas G. Lopes, I'm a front-end engineer at Hugging Face, and an open-source maintainer, and today I want to discuss how we can try and do just that.
+My name is Thomas G. Lopes, I'm a front-end engineer at Hugging Face, and an open-source maintainer. And, I have to admit, I write my fair share of crappy applications, I'm not special in that sense.
 
-Now, I believe there's one thing in common that makes us all qualified to create good software. Using the bad ones. And if you write bad code, like I mostly do, even better.
+But I do believe that the most important step in trying to improve one's abilities, is to recognize what needs improving.
+
+Lets analyze the examples I showed you before.
+
+# Analyzing shitty software
+
+<!--
+TODO: List of topics
+
+- [x] Pop-ups
+- [ ] Weird UX
+    - [ ] Toasts
+    - [ ] Forms and input patterns
+    - [ ] Auto-fill (use Shine as an example)
+- [ ] Accessibility
+    - [ ] Non-native components without kbd functionality
+    - [ ] Contrast
+    - [ ] Scroll jacking
+    - [ ] Headings
+- [ ] Cache/Local-first
+-->
+
+## Pop-ups, and lets stop blaming GDPR
+
+The first one is probably the most prevalent of all. We've been hammered into submission with popups, and led to believe that it is unavoidable.
+
+<!-- TODO: find better analogy for Rauchy  -->
+
+I've seen a lot of people like to blame GDPR, even our friend Guillermo Rauch, CEO of Vercel. But to me that's like blaming bad driving on stop signs and traffic lights.
+
+Sure, GDPR makes it so you require consent to use cookies. But not any kind,but the lets-steal-your-data-and-make-fortunes-off-it kind. GDPR comes and warns us about our stalker and we cuss it out?
+
+No, I've come here to cuss the stalkers out. There are plenty of privacy-friendly ways you can gather useful metrics out of your systems, which I'll get into later.
+
+The problem is though, is that I think companies seized an opportunity with pop-ups. Since they became normalized with cookies, a lot of users will let another pop-up slip by without cause for alert. Screaming "Free coupon!"; "Sign up to my newsletter!", and so on. All the while blocking you from going to where you want to go.
+
+All this amounts to a lot of extraneous fluff to your experience, like a shop-keeper who nags you after you told them you don't need assistance for the 3rd time.
