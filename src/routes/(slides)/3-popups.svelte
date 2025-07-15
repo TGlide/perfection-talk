@@ -59,7 +59,13 @@
 	<img src="/imgs/ars.png" alt="ars" class="abs-center absolute w-[80vw] rounded-2xl shadow" />
 
 	<!-- Low Poly Flames -->
-	{#if slide.step === 3}
+	<div
+		class={[
+			"flames-container absolute inset-x-0 bottom-0",
+			"transition-all duration-1000",
+			slide.step === 3 ? "scale-y-100 opacity-100" : "scale-y-50 opacity-0",
+		]}
+	>
 		<!-- Red flames (bottom layer) -->
 		<div class="absolute right-0 bottom-0 left-0 flex items-end justify-center opacity-80">
 			{#each flameLayers.red as flame}
@@ -127,10 +133,13 @@
 				></div>
 			{/each}
 		</div>
-	{/if}
+	</div>
 
 	<!-- Flame Sparks -->
-	{#if slide.step === 3}
+	<div
+		class="sparks-container transition-opacity duration-1000"
+		style="opacity: {slide.step === 3 ? 1 : 0};"
+	>
 		{#each sparks as spark}
 			<div
 				class="pointer-events-none absolute"
@@ -147,7 +156,7 @@
 				></div>
 			</div>
 		{/each}
-	{/if}
+	</div>
 </div>
 
 <style>
