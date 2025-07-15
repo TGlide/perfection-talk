@@ -137,13 +137,15 @@
 
 	<!-- Flame Sparks -->
 	<div
-		class="sparks-container transition-opacity duration-1000"
-		style="opacity: {slide.step === 3 ? 1 : 0};"
+		class={[
+			"sparks-container transition-opacity duration-1000",
+			slide.step === 3 ? "opacity-100 delay-500" : "opacity-0",
+		]}
 	>
 		{#each sparks as spark}
 			<div
-				class="pointer-events-none absolute"
-				style="left: {spark.x}px; top: {spark.y}px; animation-delay: {spark.delay}ms;"
+				class="fade-in pointer-events-none absolute"
+				style="left: {spark.x}px; top: {spark.y}px; animation-duration: {spark.delay}ms;"
 			>
 				<div
 					class="spark text-red-500"
