@@ -24,14 +24,14 @@
 	// Generate flame layers with different quantities and heights
 	const generateFlames = (count: number, color: string, layer: number, width: number) => {
 		return Array.from({ length: count }, (_, i) => {
-			const centerDistance = Math.abs(i - (count - 1) / 2) / ((count - 1) / 2); // Distance from center (0-1)
-			const baseHeight = 360 - (layer * 60); // Each layer gets progressively shorter
-			const maxHeight = baseHeight - (centerDistance * 200); // Taller in center, shorter at edges
-			
+			const baseHeight = 200 - layer * 50; // Each layer gets progressively shorter
+			const heightVariation = randomBetween(-25, 25); // Small random variation
+			const maxHeight = baseHeight + heightVariation;
+
 			return {
 				id: `${layer}-${i}`,
 				width,
-				maxHeight: Math.max(maxHeight, 100), // Minimum height
+				maxHeight: Math.max(maxHeight, 60), // Minimum height to avoid too short flames
 				color,
 				duration: randomBetween(2000, 3000),
 				delay: randomBetween(0, 1000),
@@ -40,10 +40,10 @@
 	};
 
 	const flameLayers = $derived({
-		red: generateFlames(Math.ceil(winSize.w / 64) || 30, '#e20f00', 0, 64),
-		orange: generateFlames(Math.ceil(winSize.w / 80) || 24, '#ff9c00', 1, 64),
-		yellow: generateFlames(Math.ceil(winSize.w / 100) || 19, '#ffeb6e', 2, 64),
-		white: generateFlames(Math.ceil(winSize.w / 140) || 14, '#fef1d9', 3, 48),
+		red: generateFlames(Math.ceil(winSize.w / 64) || 30, "#e20f00", 0, 64),
+		orange: generateFlames(Math.ceil(winSize.w / 64) || 30, "#ff9c00", 1, 64),
+		yellow: generateFlames(Math.ceil(winSize.w / 64) || 30, "#ffeb6e", 2, 64),
+		white: generateFlames(Math.ceil(winSize.w / 48) || 40, "#fef1d9", 3, 48),
 	});
 </script>
 
@@ -61,7 +61,7 @@
 	<!-- Low Poly Flames -->
 	{#if slide.step === 3}
 		<!-- Red flames (bottom layer) -->
-		<div class="absolute bottom-0 left-0 right-0 flex items-end justify-center">
+		<div class="absolute right-0 bottom-0 left-0 flex items-end justify-center opacity-80">
 			{#each flameLayers.red as flame}
 				<div
 					class="flame pointer-events-none"
@@ -76,9 +76,9 @@
 				></div>
 			{/each}
 		</div>
-		
+
 		<!-- Orange flames -->
-		<div class="absolute bottom-0 left-0 right-0 flex items-end justify-center">
+		<div class="absolute right-0 bottom-0 left-0 flex items-end justify-center opacity-80">
 			{#each flameLayers.orange as flame}
 				<div
 					class="flame pointer-events-none"
@@ -93,9 +93,9 @@
 				></div>
 			{/each}
 		</div>
-		
+
 		<!-- Yellow flames -->
-		<div class="absolute bottom-0 left-0 right-0 flex items-end justify-center">
+		<div class="absolute right-0 bottom-0 left-0 flex items-end justify-center opacity-80">
 			{#each flameLayers.yellow as flame}
 				<div
 					class="flame pointer-events-none"
@@ -110,9 +110,9 @@
 				></div>
 			{/each}
 		</div>
-		
+
 		<!-- White flames (top layer) -->
-		<div class="absolute bottom-0 left-0 right-0 flex items-end justify-center">
+		<div class="absolute right-0 bottom-0 left-0 flex items-end justify-center opacity-80">
 			{#each flameLayers.white as flame}
 				<div
 					class="flame pointer-events-none"
