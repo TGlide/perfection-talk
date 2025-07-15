@@ -20,6 +20,31 @@
 			angle: randomBetween(0, 360),
 		})),
 	);
+
+	// Generate flame layers with different quantities and heights
+	const generateFlames = (count: number, color: string, layer: number, width: number) => {
+		return Array.from({ length: count }, (_, i) => {
+			const centerDistance = Math.abs(i - (count - 1) / 2) / ((count - 1) / 2); // Distance from center (0-1)
+			const baseHeight = 360 - (layer * 60); // Each layer gets progressively shorter
+			const maxHeight = baseHeight - (centerDistance * 200); // Taller in center, shorter at edges
+			
+			return {
+				id: `${layer}-${i}`,
+				width,
+				maxHeight: Math.max(maxHeight, 100), // Minimum height
+				color,
+				duration: randomBetween(1500, 2500),
+				delay: randomBetween(0, 1000),
+			};
+		});
+	};
+
+	const flameLayers = $derived({
+		red: generateFlames(15, '#e20f00', 0, 48),
+		orange: generateFlames(12, '#ff9c00', 1, 48),
+		yellow: generateFlames(8, '#ffeb6e', 2, 48),
+		white: generateFlames(6, '#fef1d9', 3, 32),
+	});
 </script>
 
 <div {...slide.attrs} class={cn(slide.attrs.class, "relative overflow-hidden")}>
@@ -32,6 +57,77 @@
 		aria-hidden="true"
 	></div>
 	<img src="/imgs/ars.png" alt="ars" class="abs-center absolute w-[80vw] rounded-2xl shadow" />
+
+	<!-- Low Poly Flames -->
+	{#if slide.step === 3}
+		<!-- Red flames (bottom layer) -->
+		<div class="absolute bottom-0 left-0 right-0 flex items-end justify-center">
+			{#each flameLayers.red as flame}
+				<div
+					class="flame pointer-events-none"
+					style="
+						width: {flame.width}px;
+						background: {flame.color};
+						animation-duration: {flame.duration}ms;
+						animation-delay: {flame.delay}ms;
+						--max-height: {flame.maxHeight}px;
+						box-shadow: 0 0 80px 18px rgba(226,15,0,0.4);
+					"
+				></div>
+			{/each}
+		</div>
+		
+		<!-- Orange flames -->
+		<div class="absolute bottom-0 left-0 right-0 flex items-end justify-center">
+			{#each flameLayers.orange as flame}
+				<div
+					class="flame pointer-events-none"
+					style="
+						width: {flame.width}px;
+						background: {flame.color};
+						animation-duration: {flame.duration}ms;
+						animation-delay: {flame.delay}ms;
+						--max-height: {flame.maxHeight}px;
+						box-shadow: 0 0 80px 18px rgba(255,156,0,0.4);
+					"
+				></div>
+			{/each}
+		</div>
+		
+		<!-- Yellow flames -->
+		<div class="absolute bottom-0 left-0 right-0 flex items-end justify-center">
+			{#each flameLayers.yellow as flame}
+				<div
+					class="flame pointer-events-none"
+					style="
+						width: {flame.width}px;
+						background: {flame.color};
+						animation-duration: {flame.duration}ms;
+						animation-delay: {flame.delay}ms;
+						--max-height: {flame.maxHeight}px;
+						box-shadow: 0 0 80px 18px rgba(255,235,110,0.4);
+					"
+				></div>
+			{/each}
+		</div>
+		
+		<!-- White flames (top layer) -->
+		<div class="absolute bottom-0 left-0 right-0 flex items-end justify-center">
+			{#each flameLayers.white as flame}
+				<div
+					class="flame pointer-events-none"
+					style="
+						width: {flame.width}px;
+						background: {flame.color};
+						animation-duration: {flame.duration}ms;
+						animation-delay: {flame.delay}ms;
+						--max-height: {flame.maxHeight}px;
+						box-shadow: 0 0 80px 18px rgba(254,241,217,0.4);
+					"
+				></div>
+			{/each}
+		</div>
+	{/if}
 
 	<!-- Flame Sparks -->
 	{#if slide.step === 3}
@@ -115,5 +211,37 @@
 		background: linear-gradient(0deg, transparent, var(--spark-color), transparent);
 		transform: translate(-50%, -50%);
 		border-radius: 1px;
+	}
+
+	@keyframes flicker {
+		0% {
+			transform: scaleY(1);
+		}
+		28% {
+			transform: scaleY(0.7);
+		}
+		38% {
+			transform: scaleY(0.8);
+		}
+		50% {
+			transform: scaleY(0.6);
+		}
+		70% {
+			transform: scaleY(0.95);
+		}
+		82% {
+			transform: scaleY(0.58);
+		}
+		100% {
+			transform: scaleY(1);
+		}
+	}
+
+	.flame {
+		height: var(--max-height);
+		border-radius: 48px;
+		transform-origin: bottom center;
+		animation: flicker infinite ease-in-out alternate;
+		opacity: 0.9;
 	}
 </style>
