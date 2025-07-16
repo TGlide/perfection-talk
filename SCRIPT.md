@@ -38,8 +38,8 @@ TODO: List of topics
     - [x] Toasts
     - [x] Forms and input patterns
     - [x] Auto-fill (use Shine as an example)
-- [ ] Accessibility
-    - [ ] Non-native components without kbd functionality
+- [x] Accessibility
+    - [x] Non-native components without kbd functionality
     - [ ] Contrast
     - [ ] Scroll jacking
     - [ ] Headings
@@ -80,4 +80,40 @@ So, what happens when you click to auto-fill? The button stays disabled.
 
 What I then had to do was to go to the password input. Press space. Then backspace. That would trigger the change event handler, and the button would then be activated. Now try explaining why that is to other people.
 
-There are so many we
+## Accessibility
+
+It gets worse when we talk about accessibility.
+
+One of the biggest issues for me are tooltips. There's this great resource, called Inclusive Components. It goes over several common UI patterns in depth, helping us create better components.
+
+The issue with tooltip, is what is hidden. If I hover over this button with my cursor, great, I know what it does when I did not before.
+
+But, say I'm not using my cursor, and using a keyboard. I tab the button, and I don't know what it does.
+
+Or, even more important, if I'm on a mobile device. I also don't know what it does! And there is no available interaction for me to discover that information.
+
+Tooltips are not the only components guilty of this. There's an app that's pretty popular and well-praised that has some bad UX patterns, IMO.
+
+Linear.
+
+If you see this list here, at first it seems like its great. Pretty, but, just like a tooltip, it hides elements to cursor only users.
+
+I can only see this menu if I hover over it. Fortunately, I can still tab to it, but the tab navigation is a bit weird. Also, while I can open it with my keyboard, I can not close it. It only closes if I click outside, or select something.
+
+Problem is, its also inconsistent. The menu items below, don't show me the x button with the keyboard, at all.
+
+The reason this is important, is because not all users are able to use a mouse day to day. And this also affects users who just prefer using their keyboards.
+
+But, don't get me wrong, Linear is a hell of a product. They're one of the biggest competitors to Jira and managed to carve their way on a well estabilished market because they usually nail the feeling of using their apps.
+
+And the biggest reason...
+
+## Local first
+
+...is its speed.
+
+But I'm skipping ahead a bit.
+
+Lets talk about the state of the web apps today.
+
+Most of the

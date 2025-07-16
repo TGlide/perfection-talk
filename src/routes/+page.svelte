@@ -6,14 +6,14 @@
 	import Popups from "./(slides)/3-popups.svelte";
 	import Toasts from "./(slides)/4-toasts.svelte";
 	import LoginForms from "./(slides)/5-login-forms.svelte";
-	import LoginForm from "./(slides)/5-login-forms.svelte";
+	import Accessibility from "./(slides)/6-accessibility.svelte";
 
 	const DEBUG = true;
 
 	// Uncomment to always see last slide
 	$effect(() => {
 		// presentation.slideIdx = presentation.totalSlides - 1;
-		presentation.slideIdx = 4;
+		presentation.slideIdx = 5;
 	});
 </script>
 
@@ -23,6 +23,7 @@
 	<Popups />
 	<Toasts />
 	<LoginForms />
+	<Accessibility />
 </div>
 
 {#if dev && DEBUG}

@@ -4,6 +4,17 @@
 	--font-sans: Inter, sans-serif;
 	--font-significa: Significa Sans, sans-serif;
 	--font-mono: Fira Code, monospace;
+
+	--color-gray-100: #f7f6f5;
+	--color-gray-200: #efedeb;
+	--color-gray-300: #c4c1bf;
+	--color-gray-400: #908a85;
+	--color-gray-500: #5c5752;
+	--color-gray-600: #4a4541;
+	--color-gray-700: #3c3733;
+	--color-gray-800: #2a2622;
+	--color-gray-900: #1a1816;
+	--color-gray-950: #0e0d0b;
 }
 
 /*
