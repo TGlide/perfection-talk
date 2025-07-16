@@ -3,8 +3,10 @@
 	import { cn } from "$lib/style";
 	import { randomBetween } from "$lib/math";
 	import { innerHeight, innerWidth } from "svelte/reactivity/window";
+	import { animate } from "motion";
+	import type { Attachment } from "svelte/attachments";
 
-	const slide = presentation.registerSlide(4);
+	const slide = presentation.registerSlide(3);
 
 	const winSize = $derived({ w: innerWidth.current ?? 0, h: innerHeight.current ?? 0 });
 
@@ -45,6 +47,41 @@
 		yellow: generateFlames(Math.ceil(winSize.w / 64) || 30, "#ffeb6e", 2, 64),
 		white: generateFlames(Math.ceil(winSize.w / 48) || 40, "#fef1d9", 3, 48),
 	});
+
+	// Generate random pop-ups for step 3
+	const popups = $derived(
+		Array.from({ length: 32 }, (_, i) => {
+			const width = randomBetween(250, 400);
+			const padding = 64;
+			return {
+				id: i,
+				x: randomBetween(padding, winSize.w - width - padding),
+				y: randomBetween(padding, winSize.h - 200 - padding),
+				width: randomBetween(250, 400),
+				delay: randomBetween(200, 5000),
+			};
+		}),
+	);
+
+	const animatePopup: Attachment<HTMLElement> = (node) => {
+		const popup = popups.find((p) => p.id.toString() === node.dataset.id);
+		if (!popup) return;
+
+		animate(
+			node,
+			{
+				opacity: slide.step >= 3 ? 1 : 0,
+				scale: slide.step >= 3 ? 1 : 0.8,
+				y: slide.step >= 3 ? 0 : 20,
+			},
+			{
+				duration: 0.4,
+				delay: slide.step >= 3 ? popup.delay / 1000 : 0,
+				type: "spring",
+				bounce: 0.3,
+			},
+		);
+	};
 </script>
 
 <div {...slide.attrs} class={cn(slide.attrs.class, "relative overflow-hidden")}>
@@ -69,10 +106,41 @@
 		]}
 	/>
 
+	<!-- Random Pop-ups for step 3 -->
+	{#each popups as popup}
+		<div
+			class="absolute z-20 rounded-lg border border-gray-300 bg-white opacity-0 shadow-2xl"
+			style="left: {popup.x}px; top: {popup.y}px; width: {popup.width}px;"
+			data-id={popup.id}
+			{@attach animatePopup}
+		>
+			<div class="flex items-center justify-between rounded-t-lg border-b bg-gray-100 px-3 py-2">
+				<span class="text-sm font-medium text-gray-700">Annoying Pop-up #{popup.id + 1}</span>
+				<button class="text-lg font-bold text-gray-500 hover:text-gray-700">×</button>
+			</div>
+			<div class="space-y-3 p-4">
+				<p class="text-sm text-gray-600">
+					🎉 Congratulations! You've been selected for our amazing offer!
+				</p>
+				<div class="space-y-2">
+					<button class="w-full rounded bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600">
+						CLAIM NOW!
+					</button>
+					<button
+						class="w-full rounded bg-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
+					>
+						Maybe Later
+					</button>
+				</div>
+				<p class="text-xs text-gray-500">* Offer expires in 5 minutes! Don't miss out!</p>
+			</div>
+		</div>
+	{/each}
+
 	<!-- Low Poly Flames -->
 	<div
 		class={[
-			"flames-container absolute inset-x-0 bottom-0 z-20",
+			"flames-container absolute inset-x-0 bottom-0 z-30",
 			"transition-all duration-1000",
 			slide.step === 3 ? "scale-y-100 opacity-100" : "scale-y-50 opacity-0",
 		]}
@@ -155,7 +223,7 @@
 	>
 		{#each sparks as spark}
 			<div
-				class="fade-in pointer-events-none absolute z-20"
+				class="fade-in pointer-events-none absolute z-30"
 				style="left: {spark.x}px; top: {spark.y}px; animation-duration: {spark.delay}ms;"
 			>
 				<div
