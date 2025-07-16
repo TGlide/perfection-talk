@@ -35,7 +35,7 @@ TODO: List of topics
 
 - [x] Pop-ups
 - [ ] Weird UX
-    - [ ] Toasts
+    - [x] Toasts
     - [ ] Forms and input patterns
     - [ ] Auto-fill (use Shine as an example)
 - [ ] Accessibility
@@ -56,4 +56,18 @@ No, I've come here to cuss the stalkers out. There are plenty of privacy-friendl
 
 The problem is though, is that I think companies seized an opportunity with pop-ups. Since they became normalized with cookies, a lot of users will let another pop-up slip by without cause for alert. Screaming "Free coupon!"; "Sign up to my newsletter!", and so on. All the while blocking you from going to where you want to go.
 
-All this amounts to a lot of extraneous fluff to your experience, like a shop-keeper who nags you after you told them you don't need assistance for the 3rd time.
+All this amounts to a lot of extraneous fluff to your experience.
+
+<!-- https://cookieconsentspeed.run/ -->
+
+Quick shoutout, while I was doing some research for this presentation, I came across this awesome website, called cookie consent speed run. Its pretty dope, do check it out. It does a great job of illustrating some really bad patterns.
+
+## Toasts and weird UX
+
+There's a similar type of popup that is over-used, and often times badly. Toasts. Let's go to YouTube to see an example.
+
+Here's a video I really like. Its a performance of lovely song, so I'd like to add it to my Favorites. Or just any playlist really. So I click the Save button. Then, I immediately click my favorites playlist.
+
+But oops, I already had it in my favorites. So I click the checkbox again to re-add it. Great! Except there's this tucked away toast saying I just removed it. Even though the checkbox says its saved. And if I click this a few times, YouTube just has a stroke.
+
+It's quite common to see our UI contradict itself, or just be flat out wrong.

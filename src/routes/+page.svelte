@@ -4,13 +4,14 @@
 	import ShittySoftware from "./(slides)/1-shitty-software.svelte";
 	import WhoAmI from "./(slides)/2-who-am-i.svelte";
 	import Popups from "./(slides)/3-popups.svelte";
+	import Toasts from "./(slides)/4-toasts.svelte";
 
 	const DEBUG = true;
 
 	// Uncomment to always see last slide
 	$effect(() => {
 		// presentation.slideIdx = presentation.totalSlides - 1;
-		presentation.slideIdx = 2;
+		presentation.slideIdx = 3;
 	});
 </script>
 
@@ -18,7 +19,7 @@
 	<ShittySoftware />
 	<WhoAmI />
 	<Popups />
-	<WhoAmI />
+	<Toasts />
 </div>
 
 {#if dev && DEBUG}
