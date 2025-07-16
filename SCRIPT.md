@@ -36,8 +36,8 @@ TODO: List of topics
 - [x] Pop-ups
 - [ ] Weird UX
     - [x] Toasts
-    - [ ] Forms and input patterns
-    - [ ] Auto-fill (use Shine as an example)
+    - [x] Forms and input patterns
+    - [x] Auto-fill (use Shine as an example)
 - [ ] Accessibility
     - [ ] Non-native components without kbd functionality
     - [ ] Contrast
@@ -70,4 +70,14 @@ Here's a video I really like. Its a performance of lovely song, so I'd like to a
 
 But oops, I already had it in my favorites. So I click the checkbox again to re-add it. Great! Except there's this tucked away toast saying I just removed it. Even though the checkbox says its saved. And if I click this a few times, YouTube just has a stroke.
 
-It's quite common to see our UI contradict itself, or just be flat out wrong.
+It's quite common to see our UI contradict itself, or just be flat out wrong. There's this issue that I found in a shopping site I go to. I recreated the phenomenon here because they've since fixed it, kudos to them, but it goes like this.
+
+You have a login form. And so you go to click enter, and its disabled. Obviously, because you haven't filled in the data. If you go ahead and fill in your email and password, the button is then enabled. Great!
+
+The issue is, most people don't fill in their email and password. They use a password manager. (Or maybe I'm mistaken and that only happens in my ideal world where people are not using their grandma's dog's birthday as their password everywhere)
+
+So, what happens when you click to auto-fill? The button stays disabled.
+
+What I then had to do was to go to the password input. Press space. Then backspace. That would trigger the change event handler, and the button would then be activated. Now try explaining why that is to other people.
+
+There are so many we

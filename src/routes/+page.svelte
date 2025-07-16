@@ -5,13 +5,15 @@
 	import WhoAmI from "./(slides)/2-who-am-i.svelte";
 	import Popups from "./(slides)/3-popups.svelte";
 	import Toasts from "./(slides)/4-toasts.svelte";
+	import LoginForms from "./(slides)/5-login-forms.svelte";
+	import LoginForm from "./(slides)/5-login-forms.svelte";
 
 	const DEBUG = true;
 
 	// Uncomment to always see last slide
 	$effect(() => {
 		// presentation.slideIdx = presentation.totalSlides - 1;
-		presentation.slideIdx = 3;
+		presentation.slideIdx = 4;
 	});
 </script>
 
@@ -20,6 +22,7 @@
 	<WhoAmI />
 	<Popups />
 	<Toasts />
+	<LoginForms />
 </div>
 
 {#if dev && DEBUG}
