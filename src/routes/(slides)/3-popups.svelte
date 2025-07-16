@@ -10,6 +10,65 @@
 
 	const winSize = $derived({ w: innerWidth.current ?? 0, h: innerHeight.current ?? 0 });
 
+	const popupContent = [
+		{
+			title: "Cookie Preferences",
+			message: "We use cookies to enhance your browsing experience and analyze our traffic.",
+			primaryButton: "Accept All",
+			secondaryButton: "Manage Preferences",
+			footer: "You can change your preferences at any time."
+		},
+		{
+			title: "Newsletter Signup",
+			message: "Stay updated with our latest features and product announcements.",
+			primaryButton: "Subscribe",
+			secondaryButton: "Not now",
+			footer: "Unsubscribe at any time. No spam, we promise."
+		},
+		{
+			title: "Enable Notifications",
+			message: "Get notified about important updates and new messages.",
+			primaryButton: "Allow",
+			secondaryButton: "Maybe later",
+			footer: "You can change this in your browser settings."
+		},
+		{
+			title: "Free Trial Available",
+			message: "Try our premium features free for 14 days. No credit card required.",
+			primaryButton: "Start Trial",
+			secondaryButton: "Learn more",
+			footer: "Cancel anytime during your trial period."
+		},
+		{
+			title: "Location Access",
+			message: "Allow location access to show you relevant content and services nearby.",
+			primaryButton: "Allow",
+			secondaryButton: "Deny",
+			footer: "This helps us provide better recommendations."
+		},
+		{
+			title: "App Download",
+			message: "Get the best experience with our mobile app. Available on iOS and Android.",
+			primaryButton: "Download",
+			secondaryButton: "Continue in browser",
+			footer: "Rated 4.8 stars with over 10M downloads."
+		},
+		{
+			title: "Survey Feedback",
+			message: "Help us improve by sharing your thoughts. Takes less than 2 minutes.",
+			primaryButton: "Take Survey",
+			secondaryButton: "Skip",
+			footer: "Your feedback helps us build better products."
+		},
+		{
+			title: "Account Verification",
+			message: "Please verify your email address to access all features and secure your account.",
+			primaryButton: "Verify Email",
+			secondaryButton: "Resend",
+			footer: "Check your spam folder if you don't see the email."
+		}
+	];
+
 	// Generate random spark positions and properties
 	const sparks = $derived(
 		Array.from({ length: 100 }, (_, i) => ({
@@ -53,12 +112,14 @@
 		Array.from({ length: 32 }, (_, i) => {
 			const width = randomBetween(250, 400);
 			const padding = 64;
+			const contentIndex = Math.floor(Math.random() * popupContent.length);
 			return {
 				id: i,
 				x: randomBetween(padding, winSize.w - width - padding),
 				y: randomBetween(padding, winSize.h - 200 - padding),
 				width: randomBetween(250, 400),
 				delay: randomBetween(200, 5000),
+				content: popupContent[contentIndex],
 			};
 		}),
 	);
@@ -109,30 +170,32 @@
 	<!-- Random Pop-ups for step 3 -->
 	{#each popups as popup}
 		<div
-			class="absolute z-20 rounded-lg border border-gray-300 bg-white opacity-0 shadow-2xl"
+			class="absolute z-20 rounded-xl border border-neutral-200 bg-white/95 opacity-0 shadow-lg backdrop-blur-sm"
 			style="left: {popup.x}px; top: {popup.y}px; width: {popup.width}px;"
 			data-id={popup.id}
 			{@attach animatePopup}
 		>
-			<div class="flex items-center justify-between rounded-t-lg border-b bg-gray-100 px-3 py-2">
-				<span class="text-sm font-medium text-gray-700">Annoying Pop-up #{popup.id + 1}</span>
-				<button class="text-lg font-bold text-gray-500 hover:text-gray-700">×</button>
+			<div class="flex items-center justify-between px-4 py-3">
+				<h3 class="text-sm font-semibold text-neutral-900">{popup.content.title}</h3>
+				<button class="flex h-6 w-6 items-center justify-center rounded-md text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600">
+					<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
 			</div>
-			<div class="space-y-3 p-4">
-				<p class="text-sm text-gray-600">
-					🎉 Congratulations! You've been selected for our amazing offer!
+			<div class="space-y-4 px-4 pb-4">
+				<p class="text-sm text-neutral-600 leading-relaxed">
+					{popup.content.message}
 				</p>
-				<div class="space-y-2">
-					<button class="w-full rounded bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600">
-						CLAIM NOW!
+				<div class="flex gap-2">
+					<button class="flex-1 rounded-lg bg-neutral-900 px-3 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors">
+						{popup.content.primaryButton}
 					</button>
-					<button
-						class="w-full rounded bg-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
-					>
-						Maybe Later
+					<button class="flex-1 rounded-lg border border-neutral-200 px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
+						{popup.content.secondaryButton}
 					</button>
 				</div>
-				<p class="text-xs text-gray-500">* Offer expires in 5 minutes! Don't miss out!</p>
+				<p class="text-xs text-neutral-500">{popup.content.footer}</p>
 			</div>
 		</div>
 	{/each}
