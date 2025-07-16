@@ -9,7 +9,8 @@
 
 	// Uncomment to always see last slide
 	$effect(() => {
-		presentation.slideIdx = presentation.totalSlides - 1;
+		// presentation.slideIdx = presentation.totalSlides - 1;
+		presentation.slideIdx = 2;
 	});
 </script>
 
@@ -17,6 +18,7 @@
 	<ShittySoftware />
 	<WhoAmI />
 	<Popups />
+	<WhoAmI />
 </div>
 
 {#if dev && DEBUG}

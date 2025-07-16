@@ -4,19 +4,19 @@
 	import { randomBetween } from "$lib/math";
 	import { innerHeight, innerWidth } from "svelte/reactivity/window";
 
-	const slide = presentation.registerSlide(3);
+	const slide = presentation.registerSlide(4);
 
 	const winSize = $derived({ w: innerWidth.current ?? 0, h: innerHeight.current ?? 0 });
 
 	// Generate random spark positions and properties
 	const sparks = $derived(
-		Array.from({ length: 20 }, (_, i) => ({
+		Array.from({ length: 100 }, (_, i) => ({
 			id: i,
 			x: randomBetween(20, winSize.w - 20),
 			y: randomBetween(20, winSize.h - 20),
 			size: randomBetween(2, 6),
 			delay: randomBetween(1000, 10000),
-			duration: randomBetween(2000, 10000),
+			duration: randomBetween(5000, 12000),
 			angle: randomBetween(0, 360),
 		})),
 	);
@@ -51,17 +51,28 @@
 	<div
 		class={[
 			"absolute inset-x-0 bottom-0 h-screen bg-gradient-to-b from-neutral-900 to-amber-800",
-			"transition-all duration-500",
-			slide.step === 1 ? "translate-y-full opacity-0" : "opacity-80",
+			"z-0 transition-all duration-500",
+			slide.step < 3 ? "translate-y-full opacity-0" : "opacity-80",
 		]}
 		aria-hidden="true"
 	></div>
-	<img src="/imgs/ars.png" alt="ars" class="abs-center absolute w-[80vw] rounded-2xl shadow" />
+
+	<img src="/imgs/ars.png" alt="ars" class="abs-center absolute z-10 w-[80vw] rounded-2xl shadow" />
+
+	<img
+		src="/imgs/roach-g.png"
+		alt="ars"
+		class={[
+			"abs-center absolute h-[40vw] rounded-2xl shadow-xl shadow-amber-900",
+			"z-10 transition-all duration-500",
+			slide.step >= 2 ? "opacity-100" : "scale-90 opacity-0",
+		]}
+	/>
 
 	<!-- Low Poly Flames -->
 	<div
 		class={[
-			"flames-container absolute inset-x-0 bottom-0",
+			"flames-container absolute inset-x-0 bottom-0 z-20",
 			"transition-all duration-1000",
 			slide.step === 3 ? "scale-y-100 opacity-100" : "scale-y-50 opacity-0",
 		]}
@@ -144,7 +155,7 @@
 	>
 		{#each sparks as spark}
 			<div
-				class="fade-in pointer-events-none absolute"
+				class="fade-in pointer-events-none absolute z-20"
 				style="left: {spark.x}px; top: {spark.y}px; animation-duration: {spark.delay}ms;"
 			>
 				<div
@@ -163,7 +174,8 @@
 
 <style>
 	@keyframes sparkle {
-		0%, 70% {
+		0%,
+		70% {
 			opacity: 0;
 			transform: scale(0) translateY(0px);
 			background: hsl(16, 100%, 60%);

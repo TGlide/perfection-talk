@@ -50,11 +50,7 @@ TODO: List of topics
 
 The first one is probably the most prevalent of all. We've been hammered into submission with popups, and led to believe that it is unavoidable.
 
-<!-- TODO: find better analogy for Rauchy  -->
-
-I've seen a lot of people like to blame GDPR, even our friend Guillermo Rauch, CEO of Vercel. But to me that's like blaming bad driving on stop signs and traffic lights.
-
-Sure, GDPR makes it so you require consent to use cookies. But not any kind,but the lets-steal-your-data-and-make-fortunes-off-it kind. GDPR comes and warns us about our stalker and we cuss it out?
+I've seen a lot of people like to blame GDPR, even our friend Guillermo Rauch, CEO of Vercel. Sure, GDPR makes it so you require consent to use cookies. But not any kind,but the lets-steal-your-data-and-make-fortunes-off-it kind. GDPR comes and warns us about our stalker and we cuss it out?
 
 No, I've come here to cuss the stalkers out. There are plenty of privacy-friendly ways you can gather useful metrics out of your systems, which I'll get into later.
 
