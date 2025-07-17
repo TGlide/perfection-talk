@@ -43,7 +43,7 @@ TODO: List of topics
     - [ ] Contrast
     - [ ] Scroll jacking
     - [ ] Headings
-- [ ] Cache/Local-first
+- [x] Cache/Local-first
 -->
 
 ## Pop-ups, and lets stop blaming GDPR
@@ -104,16 +104,48 @@ Problem is, its also inconsistent. The menu items below, don't show me the x but
 
 The reason this is important, is because not all users are able to use a mouse day to day. And this also affects users who just prefer using their keyboards.
 
+There are many examples of elements like these out there that just do not work fully as intended, that have missed an use case here and there. This is just a small sample.
+
 But, don't get me wrong, Linear is a hell of a product. They're one of the biggest competitors to Jira and managed to carve their way on a well estabilished market because they usually nail the feeling of using their apps.
 
 And the biggest reason...
 
-## Local first
+## Everything is in the cloud
 
 ...is its speed.
 
 But I'm skipping ahead a bit.
 
-Lets talk about the state of the web apps today.
+Lets first talk about the state of the web apps today.
 
-Most of the
+Most of the apps we use today, are online.
+
+Note-taking, photo uploads, spreadsheets, design tools, you name it.
+
+The benefits of this are obvious. Its much easier to sell user data if they willingly give it away for free.
+
+Of course, there is also the added benefit of being able to access your data in all of your devices.
+
+The problem though is, you are now dealing with several problems.
+
+- Latency
+- Inconsistent data between client and server
+- Depend on an internet connection to work
+
+These may not seem like big problems, because we're so used to having online-only services these days, and internet connection is, in general over here in Europe, good enough.
+
+But then, you just happen into those situations where the internet suddenly is not so good. If you use NOS at your home, it'll drop constantly. You may be on a train where signal is not reliable. So on and so forth.
+
+Even worse, you go to distract yourself with Wordle while the internet is down, and even that relies on the internet.
+
+Regarding the inconsistent data, this is a funny example you may have run into.
+
+Most people here I assume, are programmers. We commonly use an online service to host our code and collaborate with others, such as GitHub.
+
+<!-- Go through the issues page -->
+
+## Summarizing the problems
+
+Now, a lot of these problems seem small. They are edge cases, or do not define the bulk of your experience when using an app. They do however infiltrate every corner they can, enough that we all have experienced repeatedly. They are quite devilish.
+
+The Devil is in the details. Now, as much of a cliche as the saying is, its extremely important to have it in mind.

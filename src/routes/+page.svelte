@@ -7,13 +7,13 @@
 	import Toasts from "./(slides)/4-toasts.svelte";
 	import LoginForms from "./(slides)/5-login-forms.svelte";
 	import Accessibility from "./(slides)/6-accessibility.svelte";
+	import CloudVsLocal from "./(slides)/7-cloud-vs-local.svelte";
 
 	const DEBUG = true;
 
 	// Uncomment to always see last slide
 	$effect(() => {
-		// presentation.slideIdx = presentation.totalSlides - 1;
-		presentation.slideIdx = 5;
+		presentation.slideIdx = presentation.totalSlides - 1;
 	});
 </script>
 
@@ -24,6 +24,7 @@
 	<Toasts />
 	<LoginForms />
 	<Accessibility />
+	<CloudVsLocal />
 </div>
 
 {#if dev && DEBUG}

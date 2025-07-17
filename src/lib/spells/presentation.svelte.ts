@@ -17,6 +17,10 @@ export class Slide {
 			),
 		};
 	}
+
+	get isCurrent() {
+		return presentation.isCurrent(this);
+	}
 }
 
 class Presentation {
