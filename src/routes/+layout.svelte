@@ -20,12 +20,20 @@
 	import { presentation } from "$lib/spells/presentation.svelte";
 
 	presentation.init();
+
+	const { children } = $props();
 </script>
 
 <svelte:head>
 	<title>Porto Talk</title>
 </svelte:head>
 
-<div class="h-screen w-screen overflow-hidden text-white">
-	<slot></slot>
-</div>
+<svelte:boundary>
+	<div class="h-screen w-screen overflow-hidden text-white">
+		{@render children()}
+	</div>
+
+	{#snippet pending()}
+		hi
+	{/snippet}
+</svelte:boundary>
