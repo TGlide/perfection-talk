@@ -14,12 +14,12 @@
 	import PopupsAgain from "./(slides)/11-popups.svelte";
 	import ClosingNotes from "./(slides)/12-closing-notes.svelte";
 
-	const DEBUG = true;
+	const DEBUG = false;
 
 	// Uncomment to always see last slide
-	$effect(() => {
-		presentation.slideIdx = presentation.totalSlides - 1;
-	});
+	// $effect(() => {
+	// 	presentation.slideIdx = presentation.totalSlides - 1;
+	// });
 </script>
 
 <div class="presentation" style="translate: {presentation.slideIdx * -100}vw 0">
