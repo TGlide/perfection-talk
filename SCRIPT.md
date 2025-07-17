@@ -204,3 +204,5 @@ If you're curious to see more apps that are local-first, a popular one I use is 
 Also, for more local-first resources, check out https://lofi.so/
 
 ## Form UX
+
+<!-- Mention input patterns that are bad, e.g. dd/mm/yyyy locking you in -->

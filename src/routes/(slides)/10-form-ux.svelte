@@ -7,7 +7,7 @@
 	import { LocalToasts } from "$lib/builders/local-toasts.svelte";
 	import { animate } from "motion";
 
-	const slide = presentation.registerSlide(1);
+	const slide = presentation.registerSlide(2);
 
 	// Normally id just use a css class, sorryyy
 	const inputClasses =
@@ -131,7 +131,7 @@
 			/>
 		</div>
 
-		<div class="flex items-center justify-center gap-4">
+		<div class="col-span-2 flex items-center justify-center gap-4">
 			<button
 				class="rounded-xl border border-neutral-700 bg-neutral-800 px-4 py-2
 				transition hover:bg-neutral-700/50 active:scale-95"
@@ -205,6 +205,20 @@
 				{/if}
 			</div>
 		{/each}
+	</div>
+
+	<div
+		class={[
+			"absolute inset-0 flex items-center justify-center gap-16 bg-black/50 backdrop-blur-2xl",
+			"transition",
+			slide.step < 2 && "pointer-events-none opacity-0",
+		]}
+	>
+		<ul class=" flex list-disc flex-col gap-8 text-6xl font-bold">
+			<li>Prefer native components</li>
+			<li>Othewise, prefer headless libraries</li>
+			<li>Constantly dog-food 🐶</li>
+		</ul>
 	</div>
 </div>
 
