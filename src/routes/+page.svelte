@@ -2,6 +2,7 @@
 	import { dev } from "$app/environment";
 	import { presentation } from "$lib/spells/presentation.svelte";
 	import ShittySoftware from "./(slides)/1-shitty-software.svelte";
+	import FormUx from "./(slides)/10-form-ux.svelte";
 	import WhoAmI from "./(slides)/2-who-am-i.svelte";
 	import Popups from "./(slides)/3-popups.svelte";
 	import Toasts from "./(slides)/4-toasts.svelte";
@@ -29,6 +30,7 @@
 	<CloudVsLocal />
 	<DevilishDetails />
 	<LocalFirst />
+	<FormUx />
 </div>
 
 {#if dev && DEBUG}

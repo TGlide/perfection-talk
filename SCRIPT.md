@@ -183,6 +183,8 @@ That's because Linear is not strictly cloud-only. When you first open the app, i
 
 This means that loading times are very fast, if not instant. It does however, keep a connection to the server open when available, to try and stop your data from getting stale. Whenever something changes in the server, it'll simply update the data that you have locally.
 
+This all enables a really nice behaviour as well. If the data you're interacting with is local, that means that when you try and edit, or add something, for example a new task, you don't have to wait for loading indicators, and latency, and whatever. You can just update the local data again.
+
 This is commonly referred to as a "local-first" approach, but recently a new term has been introduced for the underlying mechanism, called a "sync engine". It perfectly describes what it does, sync data between the client and server.
 
 There has been a big push in the last few years to make this more approachable. One such example is Zero.
@@ -191,24 +193,14 @@ Zero even created a kind of Linear clone, that manages to be much faster.
 
 <!-- Showcase zbugs a bit (bugs.rocicorp.dev) -->
 
-This enables a really nice behaviour as well. If the data you're interacting with is local, that means that when you try and edit, or add something, for example a new task, you don't have to wait for loading indicators, and latency, and whatever. Linear just updates the local data again.
-
-I got really excited by this idea, and wanted to experiment with it a bit. So I created a bill splitter for me and my girlfriend. It uses Zero and SvelteKit under the hood, and you'll see the same speed as you saw before. I want to however dive into the code just to give you a small glimpse of what it looks like.
-
-<!-- Show schema -->
-<!-- Show .query -->
-<!-- Show .mutate.insert -->
-<!-- Show .mutate.update -->
-<!-- Do not show data being sent while offline, not sure if it works -->
+The code for Zero is quite simple. <!-- Show code -->
 
 Now, the problem with Zero, is that its a little bit tricky to host in production. Its still in beta, so a bit unstable, and there are some not so simple steps to it.
 
-I was a bit bummed about that aspect of it, specially since my frontend pea brain can _not_ deal with things like AWS.
-
-So I decied to try something called Convex. It is similar to Zero, since it uses a sync engine, but its cache lives on the server instead, and so when you reload the data needs to be queried again. It still enables dirt-simple code, but I felt this piece was lacking. I did however, create a local cache layer on top of it, and it works great.
-
-<!-- Show thom.chat -->
+I was a bit bummed about that aspect of it, specially since my frontend pea brain can _not_ deal with things like AWS. I had to host it in a private server, and it works, but not the most scalable.
 
 If you're curious to see more apps that are local-first, a popular one I use is Obsidian. Its a note-taking app that gets often compared to Notion. But it doesn't crap itself whenever loading a new page, and lets me see my notes whenever I want to, even when NOS doesn't let me.
 
 Also, for more local-first resources, check out https://lofi.so/
+
+## Form UX

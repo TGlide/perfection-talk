@@ -15,6 +15,7 @@ export class Slide {
 				"relative h-screen w-screen shrink-0 bg-[#171717] transition",
 				presentation.animating && "scale-95 rounded-xl",
 			),
+			inert: !this.isCurrent,
 		};
 	}
 
