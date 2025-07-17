@@ -38,6 +38,8 @@ class Presentation {
 			() => document,
 			"keydown",
 			(e) => {
+				if (e.target instanceof HTMLInputElement) return;
+
 				if (!["ArrowRight", "ArrowLeft"].includes(e.key)) return;
 				if (!this.currSlide) return;
 				e.stopPropagation();

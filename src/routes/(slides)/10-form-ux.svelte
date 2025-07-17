@@ -2,6 +2,7 @@
 	import { presentation } from "$lib/spells/presentation.svelte";
 	import { cn } from "$lib/style";
 	import { createFieldValidation } from "$lib/spells/create-field-validation.svelte";
+	import { PinInput } from "melt/builders";
 
 	const slide = presentation.registerSlide(1);
 
@@ -26,6 +27,8 @@
 	});
 
 	const zeroWidthSpace = "\u200b";
+
+	const pinInput = new PinInput();
 </script>
 
 <div {...slide.attrs} class={cn(slide.attrs.class, "relative")}>
@@ -68,5 +71,26 @@
 				Sign in
 			</button>
 		</form>
+
+		<div class="flex flex-col items-center justify-center gap-4">
+			<div {...pinInput.root} class="flex items-center justify-center gap-2 font-mono">
+				{#each pinInput.inputs as input}
+					<input
+						class="focus:border-accent-500 size-12 rounded-xl border-2 border-gray-300 bg-white text-center
+				transition outline-none hover:border-gray-400 disabled:cursor-not-allowed
+				dark:border-gray-400/50 dark:bg-gray-900 dark:hover:border-gray-400 dark:focus:border-gray-300"
+						{...input}
+					/>
+				{/each}
+			</div>
+
+			<input
+				type="text"
+				class={cn(inputClasses, "w-auto")}
+				maxlength="4"
+				placeholder="Enter your pin"
+				bind:value={pinInput.value}
+			/>
+		</div>
 	</div>
 </div>
