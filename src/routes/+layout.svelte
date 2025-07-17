@@ -9,6 +9,8 @@
 	import "@fontsource/inter/700.css";
 	import "@fontsource/inter/800.css";
 	import "@fontsource/inter/900.css";
+	import "@fontsource-variable/eb-garamond/wght-italic.css";
+	import "@fontsource-variable/eb-garamond";
 
 	import "@fontsource/fira-code/300.css";
 	import "@fontsource/fira-code/400.css";

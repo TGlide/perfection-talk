@@ -44,6 +44,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource-variable/eb-garamond": "^5.2.6",
 		"@fontsource/fira-code": "^5.0.18",
 		"@fontsource/inter": "^5.0.18",
 		"@tailwindcss/vite": "^4.1.11",

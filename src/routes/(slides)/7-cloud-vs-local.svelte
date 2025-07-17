@@ -9,7 +9,7 @@
 	import SimpleIconsGooglesheets from "~icons/simple-icons/googlesheets";
 	import DeviconFigma from "~icons/devicon/figma";
 
-	const slide = presentation.registerSlide(5);
+	const slide = presentation.registerSlide(3);
 	const springOpts = { duration: 0.5, bounce: 0.2, type: "spring" } as const;
 
 	function animateCloudIcon(delay: number): Attachment<HTMLElement> {
@@ -33,7 +33,6 @@
 			class="size-64 text-white opacity-0"
 			aria-label="cloud"
 			{@attach (node: HTMLElement) => {
-				console.log(slide.isCurrent);
 				animate(
 					node,
 					{

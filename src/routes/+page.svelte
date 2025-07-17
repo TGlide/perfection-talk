@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { dev } from "$app/environment";
 	import { presentation } from "$lib/spells/presentation.svelte";
+	import "@fontsource-variable/eb-garamond/wght-italic.css";
 	import ShittySoftware from "./(slides)/1-shitty-software.svelte";
 	import WhoAmI from "./(slides)/2-who-am-i.svelte";
 	import Popups from "./(slides)/3-popups.svelte";
@@ -8,6 +9,7 @@
 	import LoginForms from "./(slides)/5-login-forms.svelte";
 	import Accessibility from "./(slides)/6-accessibility.svelte";
 	import CloudVsLocal from "./(slides)/7-cloud-vs-local.svelte";
+	import DevilishDetails from "./(slides)/8-devilish-details.svelte";
 
 	const DEBUG = true;
 
@@ -25,6 +27,7 @@
 	<LoginForms />
 	<Accessibility />
 	<CloudVsLocal />
+	<DevilishDetails />
 </div>
 
 {#if dev && DEBUG}

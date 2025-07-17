@@ -149,3 +149,15 @@ Most people here I assume, are programmers. We commonly use an online service to
 Now, a lot of these problems seem small. They are edge cases, or do not define the bulk of your experience when using an app. They do however infiltrate every corner they can, enough that we all have experienced repeatedly. They are quite devilish.
 
 The Devil is in the details. Now, as much of a cliche as the saying is, its extremely important to have it in mind.
+
+These things are a pain in the ass. As I said earlier, I maintain an open-source library, Melt UI. It is an UI library, obviously, and for every component that I have, I need to deal with a ton of devilish details.
+
+Lets take a look at the Tooltip again!
+
+It looks familiar, right? Truth is, the tooltip we've seen before was using Melt. But I neutered it, this one is much better.
+
+When I tab to it, the content appears. When I put my cursor between the trigger and the content, it is still open. It is screen reader accessible, for people with vision impairment. The list goes on. And everything is customizable.
+
+The other day a user wanted to contribute to the library, to this component specifically, and he was astonished by the amount of lines of code needed just to write a tooltip.
+
+So, the solutions I'm going to show here, are not the simplest in a lot of cases. They require you to go hunting to try and improve as much as you can. It is frustrating, but I find the end result extremely satisfying.
