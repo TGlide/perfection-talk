@@ -78,65 +78,43 @@ ${">tpircs/<".split("").toReversed().join("")}
 			{ lang: "svelte", theme: "rose-pine-moon" },
 		),
 	};
+
+	type CodeBlockProps = {
+		code: string;
+		step: number;
+		enterType: "scale" | "y";
+	};
 </script>
 
 <div
 	{...slide.attrs}
 	class={cn(slide.attrs.class, "relative flex items-center justify-center p-8")}
 >
-	<!-- Code Snippet - Step 4 -->
-	<div
-		class="absolute text-4xl leading-14 opacity-0 shadow *:rounded-xl *:p-8"
-		{@attach (node) => {
-			animate(
-				node,
-				{
-					opacity: slide.step >= 4 ? 1 : 0,
-					scale: slide.step >= 4 ? 1 : 0.8,
-				},
-				springOpts,
-			);
-		}}
-	>
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		{@html snippets.query}
-	</div>
+	{#snippet codeBlock({ code, step, enterType }: CodeBlockProps)}
+		<div
+			class="absolute text-4xl leading-14 opacity-0 shadow *:rounded-xl *:p-8"
+			{@attach (node) => {
+				const offset = slide.step - step;
+				animate(
+					node,
+					{
+						opacity: slide.step >= step ? 1 : 0,
+						scale: enterType !== "scale" || slide.step >= step ? 1 : 0.8,
+						y: enterType !== "y" || slide.step >= step ? 0 : windowSize.h,
+						filter: `brightness(${1 - offset * 0.2})`,
+					},
+					springOpts,
+				);
+			}}
+		>
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+			{@html code}
+		</div>
+	{/snippet}
 
-	<!-- Code Snippet - Step 5 -->
-	<div
-		class="absolute text-4xl leading-14 opacity-0 shadow *:rounded-xl *:p-8"
-		{@attach (node) => {
-			animate(
-				node,
-				{
-					opacity: slide.step >= 5 ? 1 : 0,
-					y: slide.step >= 5 ? 0 : windowSize.h,
-				},
-				springOpts,
-			);
-		}}
-	>
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		{@html snippets.mutation}
-	</div>
-
-	<!-- Code Snippet - Step 6 -->
-	<div
-		class="absolute text-4xl leading-14 opacity-0 shadow *:rounded-xl *:p-8"
-		{@attach (node) => {
-			animate(
-				node,
-				{
-					opacity: slide.step >= 6 ? 1 : 0,
-					y: slide.step >= 6 ? 0 : windowSize.h,
-				},
-				springOpts,
-			);
-		}}
-	>
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		{@html snippets.render}
-	</div>
+	{@render codeBlock({ code: snippets.query, step: 4, enterType: "scale" })}
+	{@render codeBlock({ code: snippets.mutation, step: 5, enterType: "y" })}
+	{@render codeBlock({ code: snippets.render, step: 6, enterType: "y" })}
 
 	<!-- Logos -->
 	<div class="flex items-center justify-center gap-16">
