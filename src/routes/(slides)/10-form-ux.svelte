@@ -6,8 +6,9 @@
 	import { fly } from "svelte/transition";
 	import { LocalToasts } from "$lib/builders/local-toasts.svelte";
 	import { animate } from "motion";
+	import { windowSize } from "$lib/spells/window-size.svelte";
 
-	const slide = presentation.registerSlide(2);
+	const slide = presentation.registerSlide(3);
 
 	// Normally id just use a css class, sorryyy
 	const inputClasses =
@@ -215,10 +216,26 @@
 		]}
 	>
 		<ul class=" flex list-disc flex-col gap-8 text-6xl font-bold">
+			<li>Constantly dog-food 🐶</li>
 			<li>Prefer native components</li>
 			<li>Othewise, prefer headless libraries</li>
-			<li>Constantly dog-food 🐶</li>
 		</ul>
+
+		<img
+			src="/imgs/a11y-is-hard.png"
+			alt="a11y is hard"
+			class="abs-center absolute w-[80vw]"
+			{@attach (node) => {
+				animate(
+					node,
+					{
+						opacity: slide.step >= 3 ? 1 : 0,
+						y: slide.step >= 3 ? 0 : windowSize.h,
+					},
+					{ duration: 0.5, bounce: 0.2, type: "spring" },
+				);
+			}}
+		/>
 	</div>
 </div>
 

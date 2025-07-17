@@ -224,4 +224,12 @@ It lets you take complete control over your cookie alerts, and make them suck a 
 
 By the way, I was so happy when I went to copy the logo for this website. Look at that! They even thought about that. This is the kind of attention to detail we love.
 
-## Animations
+## Closing notes
+
+There's so much more I'd like to say about this topic, that doesn't fit in a single talk. For example, animations are overused, and underused at the same time and could be its own separate talk. Just don't use scroll-jacking.
+
+The thing is though, you need to constantly question the state of your work, try and see if it can be improved. Use your applications yourself, because trust me, its the best way to weed out the inconsistencies. And let yourself be inspired by the great applications you see out there. Don't get intimidated, but instead, try to make something even better.
+
+At the end of the day, you'll still fail in creating something that is perfect. In the process of trying, you'll see that that is enough to create something you're truly proud of.
+
+Thank you all for your time. And thank you to all the organizers for creating this awesome local event. Any questions?

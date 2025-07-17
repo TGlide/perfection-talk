@@ -12,6 +12,7 @@
 	import DevilishDetails from "./(slides)/8-devilish-details.svelte";
 	import LocalFirst from "./(slides)/9-local-first.svelte";
 	import PopupsAgain from "./(slides)/11-popups.svelte";
+	import ClosingNotes from "./(slides)/12-closing-notes.svelte";
 
 	const DEBUG = true;
 
@@ -33,6 +34,7 @@
 	<LocalFirst />
 	<FormUx />
 	<PopupsAgain />
+	<ClosingNotes />
 </div>
 
 {#if dev && DEBUG}
