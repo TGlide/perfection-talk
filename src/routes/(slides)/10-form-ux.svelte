@@ -32,10 +32,10 @@
 </script>
 
 <div {...slide.attrs} class={cn(slide.attrs.class, "relative")}>
-	<div class="grid grid-cols-2 gap-20 p-20">
+	<div class="grid h-full grid-cols-2 gap-20 p-20">
 		<form
-			class="flex flex-col gap-2 rounded-lg border border-neutral-700
-			bg-neutral-800/50 p-6 backdrop-blur-sm"
+			class="flex flex-col gap-2 self-center rounded-lg border
+			border-neutral-700 bg-neutral-800/50 p-6 backdrop-blur-sm"
 		>
 			<label class="space-y-2">
 				<p class="text-sm font-medium text-neutral-200">
@@ -91,6 +91,15 @@
 				placeholder="Enter your pin"
 				bind:value={pinInput.value}
 			/>
+		</div>
+
+		<div class="flex items-center justify-center gap-4">
+			<button
+				class="rounded-xl border border-neutral-700 bg-neutral-800 px-4 py-2
+				transition hover:bg-neutral-700/50 active:scale-95"
+			>
+				Send email 🍞
+			</button>
 		</div>
 	</div>
 </div>
