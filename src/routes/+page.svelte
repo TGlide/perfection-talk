@@ -11,6 +11,7 @@
 	import CloudVsLocal from "./(slides)/7-cloud.svelte";
 	import DevilishDetails from "./(slides)/8-devilish-details.svelte";
 	import LocalFirst from "./(slides)/9-local-first.svelte";
+	import PopupsAgain from "./(slides)/11-popups.svelte";
 
 	const DEBUG = true;
 
@@ -31,6 +32,7 @@
 	<DevilishDetails />
 	<LocalFirst />
 	<FormUx />
+	<PopupsAgain />
 </div>
 
 {#if dev && DEBUG}

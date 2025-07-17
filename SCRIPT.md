@@ -48,11 +48,11 @@ TODO: List of topics
 
 ## Pop-ups, and lets stop blaming GDPR
 
-The first one is probably the most prevalent of all. We've been hammered into submission with popups, and led to believe that it is unavoidable.
+The first one is probably the most prevalent of all. We've been hammered into submission with popups, and led to believe that they are unavoidable.
 
-I've seen a lot of people like to blame GDPR, even our friend Guillermo Rauch, CEO of Vercel. Sure, GDPR makes it so you require consent to use cookies. But not any kind,but the lets-steal-your-data-and-make-fortunes-off-it kind. GDPR comes and warns us about our stalker and we cuss it out?
+I've seen a lot of people like to blame GDPR, even our friend Guillermo Rauch, CEO of Vercel. Sure, GDPR makes it so you require consent to use cookies. But not any kind, just the lets-steal-your-data-and-make-fortunes-off-it kind. GDPR comes and warns us about our stalker and we cuss it out? It makes no sense.
 
-No, I've come here to cuss the stalkers out. There are plenty of privacy-friendly ways you can gather useful metrics out of your systems, which I'll get into later.
+<!-- No, I've come here to cuss the stalkers out. There are plenty of privacy-friendly ways you can gather useful metrics out of your systems, which I'll get into later. -->
 
 The problem is though, is that I think companies seized an opportunity with pop-ups. Since they became normalized with cookies, a lot of users will let another pop-up slip by without cause for alert. Screaming "Free coupon!"; "Sign up to my newsletter!", and so on. All the while blocking you from going to where you want to go.
 
@@ -60,7 +60,7 @@ All this amounts to a lot of extraneous fluff to your experience.
 
 <!-- https://cookieconsentspeed.run/ -->
 
-Quick shoutout, while I was doing some research for this presentation, I came across this awesome website, called cookie consent speed run. Its pretty dope, do check it out. It does a great job of illustrating some really bad patterns.
+While I was doing some research for this presentation, I came across this fun experiment, called cookie consent speed run. (ramble)
 
 ## Toasts and weird UX
 
@@ -74,37 +74,41 @@ It's quite common to see our UI contradict itself, or just be flat out wrong. Th
 
 You have a login form. And so you go to click enter, and its disabled. Obviously, because you haven't filled in the data. If you go ahead and fill in your email and password, the button is then enabled. Great!
 
-The issue is, most people don't fill in their email and password. They use a password manager. (Or maybe I'm mistaken and that only happens in my ideal world where people are not using their grandma's dog's birthday as their password everywhere)
+The issue is, most people don't fill in their email and password manually. They use a password manager. (Or maybe I'm mistaken and that only happens in my ideal world where people are not using their dog's birthday as their password everywhere)
 
-So, what happens when you click to auto-fill? The button stays disabled.
+So, what happens when you try to auto-fill? The button stays disabled.
 
 What I then had to do was to go to the password input. Press space. Then backspace. That would trigger the change event handler, and the button would then be activated. Now try explaining why that is to other people.
 
 ## Accessibility
 
-It gets worse when we talk about accessibility.
+It gets worse when we talk about accessibility. This is a huge topic, so I want to give a single example, of one of the biggest offenders for me. Tooltips.
 
-One of the biggest issues for me are tooltips. There's this great resource, called Inclusive Components. It goes over several common UI patterns in depth, helping us create better components.
+There's this great resource, called Inclusive Components. It goes over several common UI patterns in depth, helping us create better components.
 
 The issue with tooltip, is what is hidden. If I hover over this button with my cursor, great, I know what it does when I did not before.
 
 But, say I'm not using my cursor, and using a keyboard. I tab the button, and I don't know what it does.
 
-Or, even more important, if I'm on a mobile device. I also don't know what it does! And there is no available interaction for me to discover that information.
+Or, even more important, if I'm on a mobile device. There's no available interaction for me to discover that information.
 
-Tooltips are not the only components guilty of this. There's an app that's pretty popular and well-praised that has some bad UX patterns, IMO.
+Tooltips are not the only components guilty of this. There's an app that's pretty popular and well-praised that has some bad UX patterns.
 
 Linear.
 
-If you see this list here, at first it seems like its great. Pretty, but, just like a tooltip, it hides elements to cursor only users.
+If you see this list here, at first glance it seems there's nothing wrong. Pretty, but, just like a tooltip, it hides elements to cursor only users.
 
 I can only see this menu if I hover over it. Fortunately, I can still tab to it, but the tab navigation is a bit weird. Also, while I can open it with my keyboard, I can not close it. It only closes if I click outside, or select something.
 
-Problem is, its also inconsistent. The menu items below, don't show me the x button with the keyboard, at all.
+It is also inconsistent. The menu items below, don't show me the x button with the keyboard, at all.
 
 The reason this is important, is because not all users are able to use a mouse day to day. And this also affects users who just prefer using their keyboards.
 
-There are many examples of elements like these out there that just do not work fully as intended, that have missed an use case here and there. This is just a small sample.
+There's a saying I like, that says: "We're all just temporarily abled". I think that many of us don't take accessibility too seriously, because we think that it only affects a tiny portion of the population.
+
+But accessibility is for everyone. A ramp doesn't help only wheelchair users, but also someone carrying a stroller, or a travel bag. You are able to use your two hands well, until you get a repetitive strain injury, and suddenly using your mouse becomes excrucitaingly painful. I've been there and I'm only 25.
+
+There are many examples of elements like these out there that just do not work for everyone, that have missed an use case here and there. This is just a small sample.
 
 But, don't get me wrong, Linear is a hell of a product. They're one of the biggest competitors to Jira and managed to carve their way on a well estabilished market because they usually nail the feeling of using their apps.
 
@@ -114,11 +118,9 @@ And the biggest reason...
 
 ...is its speed.
 
-But I'm skipping ahead a bit.
+Lets first talk about the state of most of the web apps today.
 
-Lets first talk about the state of the web apps today.
-
-Most of the apps we use today, are online.
+We've replaced a lot of desktop programs we used every day, with web services.
 
 Note-taking, photo uploads, spreadsheets, design tools, you name it.
 
@@ -126,7 +128,7 @@ The benefits of this are obvious. Its much easier to sell user data if they will
 
 Of course, there is also the added benefit of being able to access your data in all of your devices.
 
-The problem though is, you are now dealing with several problems.
+However, you are now dealing with several problems.
 
 - Latency
 - Inconsistent data between client and server
@@ -134,11 +136,9 @@ The problem though is, you are now dealing with several problems.
 
 These may not seem like big problems, because we're so used to having online-only services these days, and internet connection is, in general over here in Europe, good enough.
 
-But then, you just happen into those situations where the internet suddenly is not so good. If you use NOS at your home, it'll drop constantly. You may be on a train where signal is not reliable. So on and so forth.
+But then, you just happen into those situations where the internet suddenly is not so good. If you use NOS at your home, it'll drop constantly. You may be on a train where signal is not reliable. Even worse, you go to distract yourself with Wordle while the internet is down, and even that relies on the internet.
 
-Even worse, you go to distract yourself with Wordle while the internet is down, and even that relies on the internet.
-
-Regarding the inconsistent data, this is a funny example you may have run into.
+Regarding the inconsistent data, there is a funny example you may have run into.
 
 Most people here I assume, are programmers. We commonly use an online service to host our code and collaborate with others, such as GitHub.
 
@@ -146,11 +146,11 @@ Most people here I assume, are programmers. We commonly use an online service to
 
 ## Summarizing the problems
 
-Now, a lot of these problems seem small. They are edge cases, or do not define the bulk of your experience when using an app. They do however infiltrate every corner they can, enough that we all have experienced repeatedly. They are quite devilish.
+Now, a lot of these problems seem small. They are edge cases, or do not define the bulk of your experience when using an app. They do however infiltrate every corner they can, enough that we all have experienced them repeatedly. They are quite devilish.
 
 The Devil is in the details. Now, as much of a cliche as the saying is, its extremely important to have it in mind.
 
-These things are a pain in the ass. As I said earlier, I maintain an open-source library, Melt UI. It is an UI library, obviously, and for every component that I have, I need to deal with a ton of devilish details.
+These things are a pain to deal with. As I said earlier, I maintain an open-source library, Melt UI. It is an UI library, obviously, and for every component that I have, I need to deal with a ton of devilish details.
 
 Lets take a look at the Tooltip again!
 
@@ -158,11 +158,13 @@ It looks familiar, right? Truth is, the tooltip we've seen before was using Melt
 
 When I tab to it, the content appears. When I put my cursor between the trigger and the content, it is still open. It is screen reader accessible, for people with vision impairment. The list goes on. And everything is customizable.
 
-The other day a user wanted to contribute to the library, to this component specifically, and he was astonished by the amount of lines of code needed just to write a tooltip.
+The other day a user wanted to contribute to the library, to this component specifically, but he was astonished by the amount of lines of code needed just to write a tooltip.
 
 So, the solutions I'm going to show here, are not the simplest in a lot of cases. They require you to go hunting to try and improve as much as you can. It is frustrating, but I find the end result extremely satisfying.
 
-I'm not going to give you a secret sauce here, because I don't have one, as much as I'd like to. I just hope to share some of the things I came upon, and try to instill some inspiration and insight into how I approach these things.
+But I'm not going to give you a secret sauce here, because I don't have one, as much as I'd like to. The most important tool you have in your arsenal to make perfect apps, is identifying what are the bad, sometimes outright terrible practices that have plagued the industry. And not do that, do something better.
+
+I just hope to share some of the things I came upon, and try to instill some inspiration and insight into how I approach these things, instead of being comprehensive about it.
 
 # Solutions
 
@@ -170,7 +172,7 @@ I'm not going to give you a secret sauce here, because I don't have one, as much
 TODO: List of topics
 
 - [x] Cache/Local-first
-- [ ] Good UX
+- [x] Good UX
 - [ ] Animations
 - [ ] Pop-ups
 -->
@@ -203,6 +205,23 @@ If you're curious to see more apps that are local-first, a popular one I use is 
 
 Also, for more local-first resources, check out https://lofi.so/
 
+I genuinely think that, if you're building a new application, you should seriously consider local-first. It is one of the most straightforward performance gains you'll have, and once you try it, you'll feel frustrated that the entire world is not like this.
+
 ## Form UX
 
 <!-- Mention input patterns that are bad, e.g. dd/mm/yyyy locking you in -->
+<!-- Mention headless libraries -->
+
+## Popups
+
+Regarding popups, I don't have much to say, except, stop? Stop with the bad popups? please?
+
+If you need metrics, you can use privacy-focused analytics, like Plausible. Marketing should not be about extracting all of an user's data at the cost of making your website shittier, it should just be about making it more appealing. Pop-ups are not that.
+
+If however you fail to convince your marketing department that their popup sucks, there's a new library that I fell in love with. c15t.
+
+It lets you take complete control over your cookie alerts, and make them suck a lot less. Use your common sense here, avoid tricking the user, just be straight about it. Get a new job if they don't let you do that. Do something!
+
+By the way, I was so happy when I went to copy the logo for this website. Look at that! They even thought about that. This is the kind of attention to detail we love.
+
+## Animations
